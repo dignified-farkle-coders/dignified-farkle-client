@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
   /**
    * The {@link androidx.viewpager.widget.PagerAdapter} that will provide fragments for each of the
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.profile);
 
     // Create the adapter that will return a fragment for each of the three
     // primary sections of the activity.
