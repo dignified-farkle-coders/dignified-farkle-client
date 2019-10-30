@@ -35,20 +35,12 @@ public class MainActivity extends AppCompatActivity {
    * The {@link ViewPager} that will host the section contents.
    */
   private ViewPager mViewPager;
-  private Button button;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    button = (Button) findViewById(R.id.profile_button);
-    button.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        openProfileActivity();
-      }
-    });
     // Create the adapter that will return a fragment for each of the three
     // primary sections of the activity.
     mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -95,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
+    private Button button;
+
     public PlaceholderFragment() {
     }
 
@@ -116,6 +110,14 @@ public class MainActivity extends AppCompatActivity {
       TextView textView = (TextView) rootView.findViewById(R.id.section_label);
       textView
           .setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+      button = (Button) rootView.findViewById(R.id.profile_button);
+      button.setOnClickListener(new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          ((MainActivity) getActivity()).openProfileActivity();
+        }
+      });
+
       return rootView;
     }
   }
