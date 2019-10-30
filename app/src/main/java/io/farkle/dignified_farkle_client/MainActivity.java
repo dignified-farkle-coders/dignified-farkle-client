@@ -1,5 +1,8 @@
 package io.farkle.dignified_farkle_client;
 
+import android.content.Intent;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,12 +35,20 @@ public class MainActivity extends AppCompatActivity {
    * The {@link ViewPager} that will host the section contents.
    */
   private ViewPager mViewPager;
+  private Button button;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    button = (Button) findViewById(R.id.profile_button);
+    button.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        openProfileActivity();
+      }
+    });
     // Create the adapter that will return a fragment for each of the three
     // primary sections of the activity.
     mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -47,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
     mViewPager.setAdapter(mSectionsPagerAdapter);
   }
 
+  public void openProfileActivity() {
+    Intent intent = new Intent(this, ProfileActivity.class);
+    startActivity(intent);
+  }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
