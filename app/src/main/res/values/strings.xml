@@ -1,8 +1,14 @@
 <resources>
   <string name="app_name">Farkle</string>
+  <string name="user_name">User Profile</string>
+  <string name="market">Market</string>
+  <string name="tournament">Tournament</string>
   <string name="action_settings">Settings</string>
-  <string name="section_format">%1$d</string>
 
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="section_format">%1$d</string>
+  <string name="points">Points: %d</string>
+  <string name="win_ratio">Win Ratio: %f</string>
+  <string name="largest_single_point">Largest Single Point: %d</string>
+
+
 </resources>

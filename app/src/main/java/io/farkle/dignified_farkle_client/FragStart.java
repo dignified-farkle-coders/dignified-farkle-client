@@ -1,5 +1,6 @@
 package io.farkle.dignified_farkle_client;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,14 +26,13 @@ public class FragStart extends Fragment implements View.OnClickListener {
 
   @Override
   public void onClick(View view) {
-    //do what you want to do when button is clicked
-//    openProfileActivity();
+    openProfileActivity();
   }
 
-//  private void openProfileActivity() {
-//    Intent intent = new Intent(this, ProfileActivity.class);
-//    startActivity(intent);
-//  }
+  private void openProfileActivity() {
+    Intent intent = new Intent(getContext(), ProfileActivity.class);
+    startActivity(intent);
+  }
 
 
 }
