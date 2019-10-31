@@ -13,26 +13,39 @@ public class FragStart extends Fragment implements View.OnClickListener {
 
   private Button button;
   View view;
+  Button playButton;
 
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.fragment_start, container, false);
-    button = (Button) view.findViewById(R.id.profile_button);
+    button = view.findViewById(R.id.profile_button);
     button.setOnClickListener(this);
+    playButton = view.findViewById(R.id.play_button);
+    playButton.setOnClickListener(this);
     return view;
   }
 
   @Override
   public void onClick(View view) {
-    openProfileActivity();
+    switch (view.getId()) {
+      case R.id.play_button:
+        openPlayGameActivity();
+      case R.id.profile_button:
+        openProfileActivity();
+
+    }
   }
 
-  private void openProfileActivity() {
+  private void openProfileActivity () {
     Intent intent = new Intent(getContext(), ProfileActivity.class);
     startActivity(intent);
   }
 
+  private void openPlayGameActivity () {
+    Intent intent = new Intent(getContext(), PlayGameActivity.class);
+    startActivity(intent);
+  }
 
 }

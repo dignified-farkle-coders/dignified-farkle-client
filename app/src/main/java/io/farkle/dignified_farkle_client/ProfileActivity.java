@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class ProfileActivity extends AppCompatActivity {
 
-  private int points=5;
+  private int points = 5;
   private double winRatio = 0.363;
   private int highestPoint = 3450;
 

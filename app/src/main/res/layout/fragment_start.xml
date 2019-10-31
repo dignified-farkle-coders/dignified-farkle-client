@@ -50,7 +50,7 @@
     android:textStyle="italic"/>
 
   <Button
-    android:id="@+id/start_game"
+    android:id="@+id/play_button"
     android:layout_width="130dp"
     android:layout_height="60dp"
     app:layout_constraintBottom_toTopOf="@id/find_lobby"

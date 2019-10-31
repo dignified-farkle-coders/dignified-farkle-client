@@ -45,12 +45,10 @@ public class MainActivity extends AppCompatActivity {
     // Set up the ViewPager with the sections adapter.
     mViewPager = (ViewPager) findViewById(R.id.container);
     mViewPager.setAdapter(mSectionsPagerAdapter);
+    mViewPager.setCurrentItem(1);
   }
 
-  public void openProfileActivity() {
-    Intent intent = new Intent(this, ProfileActivity.class);
-    startActivity(intent);
-  }
+
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
   /**
    * A placeholder fragment containing a simple view.
    */
-  public static class PlaceholderFragment extends Fragment {
+  public static class PlaceholderFragment extends Fragment implements View.OnClickListener {
 
     /**
      * The fragment argument representing the section number for this fragment.
@@ -85,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private Button button;
+    private Button playButton;
 
 
     public PlaceholderFragment() {
@@ -104,20 +103,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
-      View rootView = inflater.inflate(R.layout.fragment_start, container, false);
+      final View rootView = inflater.inflate(R.layout.fragment_start, container, false);
       TextView textView = (TextView) rootView.findViewById(R.id.section_label);
       textView
           .setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-      button = (Button) rootView.findViewById(R.id.profile_button);
-      button.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          ((MainActivity) getActivity()).openProfileActivity();
-        }
-      });
-
+      button = rootView.findViewById(R.id.profile_button);
+      button.setOnClickListener(this);
+      playButton = rootView.findViewById(R.id.play_button);
+      playButton.setOnClickListener(this);
       return rootView;
     }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
   }
 
   /**
