@@ -3,10 +3,7 @@ package io.farkle.dignified_farkle_client;
 import android.content.Intent;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -89,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button button;
 
+
     public PlaceholderFragment() {
     }
 
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
-      View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+      View rootView = inflater.inflate(R.layout.fragment_start, container, false);
       TextView textView = (TextView) rootView.findViewById(R.id.section_label);
       textView
           .setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
@@ -134,9 +132,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public Fragment getItem(int position) {
-      // getItem is called to instantiate the fragment for the given page.
-      // Return a PlaceholderFragment (defined as a static inner class below).
-      return PlaceholderFragment.newInstance(position + 1);
+      Fragment fragment = null;
+      switch (position) {
+        case 0:
+          fragment = new FragTournament();
+          break;
+        case 1:
+          fragment = new FragStart();
+          break;
+        case 2:
+          fragment = new FragMarket();
+          break;
+      }
+      return fragment;
     }
 
     @Override

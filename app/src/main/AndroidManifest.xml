@@ -11,6 +11,7 @@
     android:theme="@style/AppTheme">
     <activity
       android:name=".ProfileActivity"
+      android:theme="@style/AppTheme.NoActionBar"
       android:screenOrientation="landscape">
     </activity>
     <activity
