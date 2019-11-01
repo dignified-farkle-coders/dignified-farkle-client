@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class FragTournament extends Fragment {
+public class TournamentFrag extends Fragment {
 
   View view;
 

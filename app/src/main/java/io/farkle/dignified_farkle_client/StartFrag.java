@@ -9,7 +9,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class FragStart extends Fragment implements View.OnClickListener {
+public class StartFrag extends Fragment implements View.OnClickListener {
 
   private Button button;
   View view;
@@ -32,8 +32,10 @@ public class FragStart extends Fragment implements View.OnClickListener {
     switch (view.getId()) {
       case R.id.play_button:
         openPlayGameActivity();
+        break;
       case R.id.profile_button:
         openProfileActivity();
+        break;
 
     }
   }

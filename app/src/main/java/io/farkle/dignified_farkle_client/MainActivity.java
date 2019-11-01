@@ -1,7 +1,5 @@
 package io.farkle.dignified_farkle_client;
 
-import android.content.Intent;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -136,13 +134,13 @@ public class MainActivity extends AppCompatActivity {
       Fragment fragment = null;
       switch (position) {
         case 0:
-          fragment = new FragTournament();
+          fragment = new TournamentFrag();
           break;
         case 1:
-          fragment = new FragStart();
+          fragment = new StartFrag();
           break;
         case 2:
-          fragment = new FragMarket();
+          fragment = new MarketFrag();
           break;
       }
       return fragment;
