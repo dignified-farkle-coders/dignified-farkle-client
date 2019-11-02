@@ -6,7 +6,18 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".GameSetupActivity"
+  android:padding="20dp"
   android:background="@drawable/main_background">
+
+  <Button
+    android:id="@+id/start_game_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Start Game"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintRight_toRightOf="@id/player3Id"
+    app:layout_constraintLeft_toLeftOf="@id/player3Id"
+    style="@drawable/start_game_button"/>
 
   <TextView
     android:id="@+id/setup"
@@ -34,95 +45,124 @@
     android:id="@+id/playerId"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text=""
+    android:text=" "
     android:textSize="24sp"
     android:textColor="@color/textColors"
     android:paddingBottom="10sp"
     android:paddingTop="20sp"
     android:textStyle="bold"
-    app:layout_constraintTop_toBottomOf="@id/button1"
+    app:layout_constraintTop_toBottomOf="@id/radio_group"
     app:layout_constraintLeft_toLeftOf="parent"/>
 
   <EditText
     android:id="@+id/player1Id"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:hint="Player One"
+    app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toBottomOf="@id/playerId"
-    app:layout_constraintLeft_toLeftOf="@id/playerId"/>
+    android:background="@drawable/edit_text_background"
+    style="@style/EditText"
+    />
+
 
   <EditText
     android:id="@+id/player2Id"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:hint="Player Two"
     app:layout_constraintTop_toBottomOf="@id/playerId"
-    app:layout_constraintLeft_toLeftOf="@id/playerId"/>
+    app:layout_constraintLeft_toLeftOf="@id/setup"
+    app:layout_constraintRight_toRightOf="@id/setup"
+    android:background="@drawable/edit_text_background"
+    style="@style/EditText"/>
 
   <EditText
     android:id="@+id/player3Id"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:hint="Player Three"
     app:layout_constraintTop_toBottomOf="@id/playerId"
-    app:layout_constraintLeft_toLeftOf="@id/playerId"/>
+    app:layout_constraintRight_toRightOf="parent"
+    android:background="@drawable/edit_text_background"
+    style="@style/EditText"/>
 
   <EditText
     android:id="@+id/player4Id"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toBottomOf="@id/playerId"
-    app:layout_constraintLeft_toLeftOf="@id/playerId"/>
+    android:hint="Player Four"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    android:background="@drawable/edit_text_background"
+    style="@style/EditText"/>
 
   <EditText
     android:id="@+id/player5Id"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toBottomOf="@id/playerId"
-    app:layout_constraintLeft_toLeftOf="@id/playerId"/>
+    android:hint="Player Five"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="@id/setup"
+    app:layout_constraintRight_toRightOf="@id/setup"
+    android:background="@drawable/edit_text_background"
+    style="@style/EditText"/>
 
-  <Button
-    android:id="@+id/button1"
+  <RadioGroup
+    android:id="@+id/radio_group"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="1"
-    app:layout_constraintRight_toLeftOf="@id/button2"
-    app:layout_constraintTop_toBottomOf="@id/number_of_players"
-    style="@style/SettingsButtons"/>
-
-  <Button
-    android:id="@+id/button2"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="2"
-    app:layout_constraintRight_toLeftOf="@id/button3"
-    app:layout_constraintTop_toBottomOf="@id/number_of_players"
-    style="@style/SettingsButtons"/>
-
-  <Button
-    android:id="@+id/button3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="3"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/number_of_players"
-    style="@style/SettingsButtons"/>
+    android:orientation="horizontal"
+    app:layout_constraintTop_toBottomOf="@id/number_of_players">
 
-  <Button
-    android:id="@+id/button4"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="4"
-    app:layout_constraintLeft_toRightOf="@id/button3"
-    app:layout_constraintTop_toBottomOf="@id/number_of_players"
-    style="@style/SettingsButtons"/>
+    <ToggleButton
+      android:id="@+id/button1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textOff="1"
+      android:textOn="SET"
+      android:onClick="onRadioButtonClicked"
+      app:layout_constraintRight_toLeftOf="@id/button2"
+      app:layout_constraintTop_toBottomOf="@id/number_of_players"
+      style="@style/SettingsButtons"/>
 
-  <Button
-    android:id="@+id/button5"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="5"
-    app:layout_constraintLeft_toRightOf="@id/button4"
-    app:layout_constraintTop_toBottomOf="@id/number_of_players"
-    style="@style/SettingsButtons"/>
+    <ToggleButton
+      android:id="@+id/button2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textOff="2"
+      android:textOn="SET"
+      android:onClick="onRadioButtonClicked"
+      app:layout_constraintRight_toLeftOf="@id/button3"
+      app:layout_constraintTop_toBottomOf="@id/number_of_players"
+      style="@style/SettingsButtons"/>
+
+    <ToggleButton
+      android:id="@+id/button3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textOff="3"
+      android:textOn="SET"
+      android:onClick="onRadioButtonClicked"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/number_of_players"
+      style="@style/SettingsButtons"/>
+
+    <ToggleButton
+      android:id="@+id/button4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textOff="4"
+      android:textOn="SET"
+      android:onClick="onRadioButtonClicked"
+      app:layout_constraintLeft_toRightOf="@id/button3"
+      app:layout_constraintTop_toBottomOf="@id/number_of_players"
+      style="@style/SettingsButtons"/>
+
+    <ToggleButton
+      android:id="@+id/button5"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textOff="5"
+      android:textOn="SET"
+      android:onClick="onRadioButtonClicked"
+      app:layout_constraintLeft_toRightOf="@id/button4"
+      app:layout_constraintTop_toBottomOf="@id/number_of_players"
+      style="@style/SettingsButtons"/>
+  </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

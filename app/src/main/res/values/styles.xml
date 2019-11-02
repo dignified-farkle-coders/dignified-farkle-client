@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -17,13 +17,21 @@
   <style name="Headers" parent="Theme.AppCompat.Light">
     <item name="android:textSize">28sp</item>
     <item name="android:textStyle">bold</item>
-    <item name="android:padding">20sp</item>
+    <item name="android:paddingBottom">20sp</item>
     <item name="android:textColor">@color/textColors</item>
   </style>
   
   <style name="SettingsButtons" parent="Theme.AppCompat.Light">
-    <item name="android:layout_marginRight">30dp</item>
-    <item name="android:layout_marginLeft">30dp</item>
+    <item name="android:layout_marginRight">10dp</item>
+    <item name="android:layout_marginLeft">10dp</item>
+  </style>
+
+  <style name="EditText">
+    <item name="android:layout_width">175dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="android:includeFontPadding">true</item>
+    <item name="android:paddingRight">20dp</item>
+    <item name="android:paddingLeft">10dp</item>
   </style>
 
   <style name="AppTheme.NoActionBar">
