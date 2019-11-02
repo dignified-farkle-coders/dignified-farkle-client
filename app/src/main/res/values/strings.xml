@@ -9,6 +9,10 @@
   <string name="points">Points: %d</string>
   <string name="win_ratio">Win Ratio: %f</string>
   <string name="largest_single_point">Largest Single Point: %d</string>
+  <string name="farkle">Farkle</string>
+  <string name="find_lobby">Find Lobby</string>
+  <string name="create_lobby">create lobby</string>
+  <string name="play_game">Play Game</string>
 
 
 </resources>

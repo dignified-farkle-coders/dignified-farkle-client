@@ -10,6 +10,11 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
     <activity
+      android:name=".GameSetupActivity"
+      android:screenOrientation="landscape"
+      android:theme="@style/AppTheme.NoActionBar">
+    </activity>
+    <activity
       android:name=".PlayGameActivity"
       android:screenOrientation="landscape"
       android:theme="@style/AppTheme.NoActionBar">

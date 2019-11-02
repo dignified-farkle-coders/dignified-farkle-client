@@ -31,13 +31,18 @@ public class StartFrag extends Fragment implements View.OnClickListener {
   public void onClick(View view) {
     switch (view.getId()) {
       case R.id.play_button:
-        openPlayGameActivity();
+        openGameSettupActivity();
         break;
       case R.id.profile_button:
         openProfileActivity();
         break;
 
     }
+  }
+
+  private void openGameSettupActivity () {
+    Intent intent = new Intent(getContext(), GameSetupActivity.class);
+    startActivity(intent);
   }
 
   private void openProfileActivity () {

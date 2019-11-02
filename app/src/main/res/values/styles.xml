@@ -15,9 +15,15 @@
   </style>
 
   <style name="Headers" parent="Theme.AppCompat.Light">
-    <item name="android:textSize">24sp</item>
-    <item name="android:padding">30sp</item>
+    <item name="android:textSize">28sp</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:padding">20sp</item>
     <item name="android:textColor">@color/textColors</item>
+  </style>
+  
+  <style name="SettingsButtons" parent="Theme.AppCompat.Light">
+    <item name="android:layout_marginRight">30dp</item>
+    <item name="android:layout_marginLeft">30dp</item>
   </style>
 
   <style name="AppTheme.NoActionBar">
