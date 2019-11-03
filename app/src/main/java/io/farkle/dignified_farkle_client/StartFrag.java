@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import io.farkle.dignified_farkle_client.game_setup.GameSetupActivity;
 
 public class StartFrag extends Fragment implements View.OnClickListener {
 
   private Button button;
-  View view;
-  Button playButton;
+  private View view;
+  private Button playButton;
 
   @Nullable
   @Override

@@ -5,162 +5,77 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".GameSetupActivity"
+  tools:context=".game_setup.GameSetupActivity"
   android:padding="20dp"
   android:background="@drawable/main_background">
 
   <Button
-    android:id="@+id/start_game_button"
+    android:id="@+id/next_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Start Game"
+    android:text="Next"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintRight_toRightOf="@id/player3Id"
-    app:layout_constraintLeft_toLeftOf="@id/player3Id"
-    style="@drawable/start_game_button"/>
-
-  <TextView
-    android:id="@+id/setup"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Setup"
-    style="@style/Headers"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"/>
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"/>
 
   <TextView
     android:id="@+id/number_of_players"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Number of Players:"
-    android:textSize="24sp"
-    android:textColor="@color/textColors"
-    android:paddingBottom="10sp"
-    android:textStyle="bold"
-    app:layout_constraintTop_toBottomOf="@id/setup"
-    app:layout_constraintLeft_toLeftOf="parent"/>
-
-  <TextView
-    android:id="@+id/playerId"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text=" "
-    android:textSize="24sp"
-    android:textColor="@color/textColors"
-    android:paddingBottom="10sp"
-    android:paddingTop="20sp"
-    android:textStyle="bold"
-    app:layout_constraintTop_toBottomOf="@id/radio_group"
-    app:layout_constraintLeft_toLeftOf="parent"/>
-
-  <EditText
-    android:id="@+id/player1Id"
-    android:hint="Player One"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/playerId"
-    android:background="@drawable/edit_text_background"
-    style="@style/EditText"
-    />
-
-
-  <EditText
-    android:id="@+id/player2Id"
-    android:hint="Player Two"
-    app:layout_constraintTop_toBottomOf="@id/playerId"
-    app:layout_constraintLeft_toLeftOf="@id/setup"
-    app:layout_constraintRight_toRightOf="@id/setup"
-    android:background="@drawable/edit_text_background"
-    style="@style/EditText"/>
-
-  <EditText
-    android:id="@+id/player3Id"
-    android:hint="Player Three"
-    app:layout_constraintTop_toBottomOf="@id/playerId"
+    android:text="@string/number_of_players"
+    app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    android:background="@drawable/edit_text_background"
-    style="@style/EditText"/>
-
-  <EditText
-    android:id="@+id/player4Id"
-    android:hint="Player Four"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-    android:background="@drawable/edit_text_background"
-    style="@style/EditText"/>
-
-  <EditText
-    android:id="@+id/player5Id"
-    android:hint="Player Five"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toLeftOf="@id/setup"
-    app:layout_constraintRight_toRightOf="@id/setup"
-    android:background="@drawable/edit_text_background"
-    style="@style/EditText"/>
+    style="@style/Headers"/>
 
   <RadioGroup
-    android:id="@+id/radio_group"
+    android:id="@+id/radioGroup"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    android:orientation="horizontal"
-    app:layout_constraintTop_toBottomOf="@id/number_of_players">
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
 
-    <ToggleButton
+    <RadioButton
       android:id="@+id/button1"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textOff="1"
-      android:textOn="SET"
-      android:onClick="onRadioButtonClicked"
-      app:layout_constraintRight_toLeftOf="@id/button2"
-      app:layout_constraintTop_toBottomOf="@id/number_of_players"
+      android:onClick="checkButton"
+      android:text="@string/_1"
+      android:button="@android:color/transparent"
+      android:background="@drawable/start_game_button"
       style="@style/SettingsButtons"/>
 
-    <ToggleButton
+    <RadioButton
       android:id="@+id/button2"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textOff="2"
-      android:textOn="SET"
-      android:onClick="onRadioButtonClicked"
-      app:layout_constraintRight_toLeftOf="@id/button3"
-      app:layout_constraintTop_toBottomOf="@id/number_of_players"
+      android:onClick="checkButton"
+      android:text="@string/_2"
+      android:button="@android:color/transparent"
+      android:background="@drawable/start_game_button"
       style="@style/SettingsButtons"/>
 
-    <ToggleButton
+    <RadioButton
       android:id="@+id/button3"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textOff="3"
-      android:textOn="SET"
-      android:onClick="onRadioButtonClicked"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/number_of_players"
+      android:onClick="checkButton"
+      android:text="@string/_3"
+      android:button="@android:color/transparent"
+      android:background="@drawable/start_game_button"
       style="@style/SettingsButtons"/>
 
-    <ToggleButton
+    <RadioButton
       android:id="@+id/button4"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textOff="4"
-      android:textOn="SET"
-      android:onClick="onRadioButtonClicked"
-      app:layout_constraintLeft_toRightOf="@id/button3"
-      app:layout_constraintTop_toBottomOf="@id/number_of_players"
+      android:onClick="checkButton"
+      android:text="@string/_4"
+      android:button="@android:color/transparent"
+      android:background="@drawable/start_game_button"
       style="@style/SettingsButtons"/>
 
-    <ToggleButton
+    <RadioButton
       android:id="@+id/button5"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textOff="5"
-      android:textOn="SET"
-      android:onClick="onRadioButtonClicked"
-      app:layout_constraintLeft_toRightOf="@id/button4"
-      app:layout_constraintTop_toBottomOf="@id/number_of_players"
+      android:onClick="checkButton"
+      android:text="@string/_5"
+      android:button="@android:color/transparent"
+      android:background="@drawable/start_game_button"
       style="@style/SettingsButtons"/>
   </RadioGroup>
 

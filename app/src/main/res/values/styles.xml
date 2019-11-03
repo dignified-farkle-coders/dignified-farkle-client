@@ -20,11 +20,6 @@
     <item name="android:paddingBottom">20sp</item>
     <item name="android:textColor">@color/textColors</item>
   </style>
-  
-  <style name="SettingsButtons" parent="Theme.AppCompat.Light">
-    <item name="android:layout_marginRight">10dp</item>
-    <item name="android:layout_marginLeft">10dp</item>
-  </style>
 
   <style name="EditText">
     <item name="android:layout_width">175dp</item>

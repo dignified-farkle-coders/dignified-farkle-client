@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
     // Set up the ViewPager with the sections adapter.
-    mViewPager = (ViewPager) findViewById(R.id.container);
+    mViewPager = findViewById(R.id.container);
     mViewPager.setAdapter(mSectionsPagerAdapter);
     mViewPager.setCurrentItem(1);
   }
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
       final View rootView = inflater.inflate(R.layout.fragment_start, container, false);
-      TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+      TextView textView = rootView.findViewById(R.id.section_label);
       textView
           .setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
       button = rootView.findViewById(R.id.profile_button);
