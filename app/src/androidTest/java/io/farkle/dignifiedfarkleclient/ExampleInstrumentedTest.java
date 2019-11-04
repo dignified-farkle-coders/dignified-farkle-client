@@ -1,4 +1,4 @@
-package io.farkle.dignified_farkle_client;
+package io.farkle.dignifiedfarkleclient;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;
