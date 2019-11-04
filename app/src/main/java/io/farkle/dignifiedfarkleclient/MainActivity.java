@@ -1,8 +1,8 @@
-package io.farkle.dignified_farkle_client;
+package io.farkle.dignifiedfarkleclient;
 
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;

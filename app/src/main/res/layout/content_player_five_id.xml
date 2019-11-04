@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   app:layout_behavior="@string/appbar_scrolling_view_behavior"
-  tools:context=".game_setup.PlayerFiveId"
+  tools:context=".gamesetup.PlayerFiveId"
   tools:showIn="@layout/activity_player_five_id">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

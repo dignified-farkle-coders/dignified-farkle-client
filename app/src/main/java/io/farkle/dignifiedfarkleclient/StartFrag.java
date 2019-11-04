@@ -1,4 +1,4 @@
-package io.farkle.dignified_farkle_client;
+package io.farkle.dignifiedfarkleclient;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import io.farkle.dignified_farkle_client.game_setup.GameSetupActivity;
+import io.farkle.dignifiedfarkleclient.gamesetup.GameSetupActivity;
 
 public class StartFrag extends Fragment implements View.OnClickListener {
 
