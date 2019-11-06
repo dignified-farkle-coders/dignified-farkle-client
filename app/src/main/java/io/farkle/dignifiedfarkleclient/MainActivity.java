@@ -1,11 +1,18 @@
 package io.farkle.dignifiedfarkleclient;
 
+import android.content.Intent;
 import android.widget.Button;
 
+import android.widget.Toast;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,20 +22,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+  public static final int ADD_NOTE_REQUEST = 1;
 
-  /**
-   * The {@link androidx.viewpager.widget.PagerAdapter} that will provide fragments for each of the
-   * sections. We use a {@link FragmentPagerAdapter} derivative, which will keep every loaded
-   * fragment in memory. If this becomes too memory intensive, it may be best to switch to a
-   * androidx.fragment.app.FragmentStatePagerAdapter.
-   */
+  private NoteViewModel noteViewModel;
   private SectionsPagerAdapter mSectionsPagerAdapter;
-
-  /**
-   * The {@link ViewPager} that will host the section contents.
-   */
   private ViewPager mViewPager;
 
   @Override
@@ -36,17 +37,37 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    // Create the adapter that will return a fragment for each of the three
-    // primary sections of the activity.
-    mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+    FloatingActionButton buttonAddNote = findViewById(R.id.button_add_note);
+    buttonAddNote.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
+        startActivityForResult(intent, 1);
+      }
 
-    // Set up the ViewPager with the sections adapter.
-    mViewPager = findViewById(R.id.container);
-    mViewPager.setAdapter(mSectionsPagerAdapter);
-    mViewPager.setCurrentItem(1);
+    });
+
+    RecyclerView recyclerView = findViewById(R.id.recycler_view);
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    recyclerView.setHasFixedSize(true);
+
+    final NoteAdapter adapter = new NoteAdapter();
+    recyclerView.setAdapter(adapter);
+
+    noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
+    noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
+      @Override
+      public void onChanged(List<Note> notes) {
+        adapter.setNotes(notes);
+      }
+    });
+
+//    mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+//
+//    mViewPager = findViewById(R.id.container);
+//    mViewPager.setAdapter(mSectionsPagerAdapter);
+//    mViewPager.setCurrentItem(1);
   }
-
-
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,6 +171,24 @@ public class MainActivity extends AppCompatActivity {
     public int getCount() {
       // Show 3 total pages.
       return 3;
+    }
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if (requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK) {
+      String title = data.getStringExtra(AddNoteActivity.EXTRA_TITLE);
+      String description = data.getStringExtra(AddNoteActivity.EXTRA_DESCRIPTION);
+      int priority = data.getIntExtra(AddNoteActivity.EXTRA_PRIORITY, 1);
+
+      Note note = new Note(title, description, priority);
+      noteViewModel.insert(note);
+
+      Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show();
+    } else {
+      Toast.makeText(this, "Note not saved", Toast.LENGTH_SHORT).show();
     }
   }
 }
