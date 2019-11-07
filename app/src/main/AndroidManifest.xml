@@ -9,8 +9,6 @@
     android:roundIcon="@mipmap/round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".AddNoteActivity"
-      android:parentActivityName=".MainActivity"/>
     <activity
       android:label="@string/title_activity_player_five_id"
       android:name=".gamesetup.PlayerFiveId"
@@ -68,6 +66,7 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+    <activity android:name=".AddNoteActivity" android:parentActivityName=".MainActivity"></activity>
   </application>
 
 </manifest>
