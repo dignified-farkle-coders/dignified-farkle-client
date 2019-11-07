@@ -8,7 +8,7 @@
   android:layout_height="match_parent"
   android:fitsSystemWindows="true"
   android:padding="20dp"
-  tools:context=".MainActivity"
+  tools:context=".controller.MainActivity"
   android:background="@drawable/main_background">
 
   <TextView

@@ -1,25 +1,20 @@
 package io.farkle.dignifiedfarkleclient;
 
 import android.app.Application;
-import com.facebook.stetho.Stetho;
+import io.farkle.dignifiedfarkleclient.service.GoogleSignInService;
 
+/**
+ * Class containing main (non-UI) entry point for this app.
+ */
 public class FarkleApplication extends Application {
 
-
+  /**
+   * Initializes the app by passing this instance (as the context) to {@link GoogleSignInService}.
+   */
   @Override
   public void onCreate() {
     super.onCreate();
-//    GoogleSignInService.setApplicationContext(this);
-    Stetho.initializeWithDefaults(this);
-
-    NoteDatabase.setApplicationContext(this);
-    NoteDatabase database = NoteDatabase.getInstance();
-    new Thread(new Runnable() {
-      @Override
-      public void run() {
-        database.getNoteDao().delete();
-      }
-    }).start();
+    GoogleSignInService.setApplicationContext(this);
   }
 
 }
