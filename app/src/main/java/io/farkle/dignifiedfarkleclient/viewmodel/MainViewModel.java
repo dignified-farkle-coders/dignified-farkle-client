@@ -140,7 +140,7 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
   }
 
   @OnLifecycleEvent(Event.ON_STOP)
-  private void clearPending() {
+  public void clearPending() {
     pending.clear();
   }
 
