@@ -32,9 +32,6 @@ public interface FarkleService {
    *
    * @return singleton instance.
    */
-  static FarkleService getInstance() {
-    return InstanceHolder.INSTANCE;
-  }
 
   /**
    * Requests all passphrases associated with the currently logged-in user.
@@ -100,6 +97,10 @@ public interface FarkleService {
    */
   @POST("passphrases/")
   Single<Passphrase> post(@Header("Authorization") String token, @Body Passphrase passphrase);
+
+  static FarkleService getInstance() {
+    return InstanceHolder.INSTANCE;
+  }
 
   class InstanceHolder {
 

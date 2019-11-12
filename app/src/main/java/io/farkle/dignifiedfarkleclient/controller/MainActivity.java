@@ -3,16 +3,14 @@ package io.farkle.dignifiedfarkleclient.controller;
 import android.content.Intent;
 import android.widget.Button;
 
+import android.widget.ProgressBar;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,26 +20,37 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import io.farkle.dignifiedfarkleclient.MarketFrag;
 import io.farkle.dignifiedfarkleclient.R;
 import io.farkle.dignifiedfarkleclient.StartFrag;
 import io.farkle.dignifiedfarkleclient.TournamentFrag;
+import io.farkle.dignifiedfarkleclient.model.Passphrase;
+import io.farkle.dignifiedfarkleclient.service.GoogleSignInService;
+import io.farkle.dignifiedfarkleclient.view.FarkleAdapter.OnClickListener;
+import io.farkle.dignifiedfarkleclient.view.FarkleAdapter.OnContextListener;
+import io.farkle.dignifiedfarkleclient.viewmodel.MainViewModel;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-  public static final int ADD_NOTE_REQUEST = 1;
+public class MainActivity extends AppCompatActivity
+    implements OnClickListener, OnContextListener, OnCompleteListener {
 
-  private SectionsPagerAdapter mSectionsPagerAdapter;
-  private ViewPager mViewPager;
+  private ProgressBar waiting;
+  private MainViewModel viewModel;
+  private GoogleSignInService signInService;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+    SectionsPagerAdapter mSectionsPagerAdapter =
+        new SectionsPagerAdapter(getSupportFragmentManager());
 
-    mViewPager = findViewById(R.id.container);
+
+    setupSignIn();
+    ViewPager mViewPager = findViewById(R.id.container);
     mViewPager.setAdapter(mSectionsPagerAdapter);
     mViewPager.setCurrentItem(1);
   }
@@ -53,19 +62,55 @@ public class MainActivity extends AppCompatActivity {
     return true;
   }
 
+  private void setupSignIn() {
+    signInService = GoogleSignInService.getInstance();
+//    signInService.getAccount().observe(this, (account) -> viewModel.setAccount(account));
+  }
+
+  private void refreshSignIn(Runnable runnable) {
+    waiting.setVisibility(View.VISIBLE);
+    signInService.refresh()
+        .addOnSuccessListener((account) -> runnable.run())
+        .addOnFailureListener((e) -> signOut());
+  }
+
+  private void signOut() {
+    signInService.signOut()
+        .addOnCompleteListener((task) -> {
+          Intent intent = new Intent(this, LoginActivity.class);
+          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+          startActivity(intent);
+        });
+  }
+
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
-    int id = item.getItemId();
-
-    //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
-      return true;
+    boolean handled = true;
+    switch (item.getItemId()) {
+      case R.id.action_settings:
+        break;
+      case R.id.sign_out:
+        signOut();
+        break;
+      default:
+        handled = super.onOptionsItemSelected(item);
     }
+    return handled;
+  }
 
-    return super.onOptionsItemSelected(item);
+  @Override
+  public void onComplete(@NonNull Task task) {
+
+  }
+
+  @Override
+  public void onClick(View view, int position, Passphrase passphrase) {
+
+  }
+
+  @Override
+  public void onLongPress(Menu menu, int position, Passphrase passphrase) {
+
   }
 
   /**
@@ -110,11 +155,11 @@ public class MainActivity extends AppCompatActivity {
       return rootView;
     }
 
+
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
 
     }
-
   }
 
   public class SectionsPagerAdapter extends FragmentPagerAdapter {
