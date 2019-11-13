@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.widget.Button;
 
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -26,12 +24,11 @@ import io.farkle.dignifiedfarkleclient.MarketFrag;
 import io.farkle.dignifiedfarkleclient.R;
 import io.farkle.dignifiedfarkleclient.StartFrag;
 import io.farkle.dignifiedfarkleclient.TournamentFrag;
-import io.farkle.dignifiedfarkleclient.model.Passphrase;
+import io.farkle.dignifiedfarkleclient.model.Points;
 import io.farkle.dignifiedfarkleclient.service.GoogleSignInService;
 import io.farkle.dignifiedfarkleclient.view.FarkleAdapter.OnClickListener;
 import io.farkle.dignifiedfarkleclient.view.FarkleAdapter.OnContextListener;
 import io.farkle.dignifiedfarkleclient.viewmodel.MainViewModel;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
     implements OnClickListener, OnContextListener, OnCompleteListener {
@@ -104,12 +101,12 @@ public class MainActivity extends AppCompatActivity
   }
 
   @Override
-  public void onClick(View view, int position, Passphrase passphrase) {
+  public void onClick(View view, int position, Points passphrase) {
 
   }
 
   @Override
-  public void onLongPress(Menu menu, int position, Passphrase passphrase) {
+  public void onLongPress(Menu menu, int position, Points passphrase) {
 
   }
 

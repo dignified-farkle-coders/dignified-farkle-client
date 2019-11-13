@@ -11,7 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.OnLifecycleEvent;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import io.farkle.dignifiedfarkleclient.R;
-import io.farkle.dignifiedfarkleclient.model.Passphrase;
+import io.farkle.dignifiedfarkleclient.model.Points;
 import io.farkle.dignifiedfarkleclient.service.FarkleService;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -25,7 +25,7 @@ import java.util.List;
 public class MainViewModel extends AndroidViewModel implements LifecycleObserver {
 
   private final FarkleService farkleService;
-  private final MutableLiveData<List<Passphrase>> passphrases;
+  private final MutableLiveData<List<Points>> passphrases;
   private final MutableLiveData<GoogleSignInAccount> account;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
@@ -46,9 +46,9 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
   }
 
   /**
-   * Returns the observable list of {@link Passphrase} instances from the server-based collection.
+   * Returns the observable list of {@link Points} instances from the server-based collection.
    */
-  public LiveData<List<Passphrase>> getPassphrases() {
+  public LiveData<List<Points>> getPassphrases() {
     return passphrases;
   }
 
@@ -68,9 +68,9 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
   }
 
   /**
-   * Deletes the specified {@link Passphrase} from the server-based collection.
+   * Deletes the specified {@link Points} from the server-based collection.
    */
-  public void deletePassphrase(Passphrase passphrase) {
+  public void deletePassphrase(Points passphrase) {
     GoogleSignInAccount account = this.account.getValue();
     if (passphrase != null && passphrase.getId() > 0 && account != null) {
       String token = getAuthorizationHeader(account);
@@ -83,7 +83,7 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
   }
 
   /**
-   * Request a refresh from the server of the collection of {@link Passphrase} instances.
+   * Request a refresh from the server of the collection of {@link Points} instances.
    */
   public void refreshPassphrases() {
     GoogleSignInAccount account = this.account.getValue();
@@ -95,9 +95,9 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
   }
 
   /**
-   * Adds the specified {@link Passphrase} instance to the server-based collection.
+   * Adds the specified {@link Points} instance to the server-based collection.
    */
-  public void addPassphrase(Passphrase passphrase) {
+  public void addPassphrase(Points passphrase) {
     GoogleSignInAccount account = this.account.getValue();
     if (account != null) {
       String token = getAuthorizationHeader(account);
@@ -110,9 +110,9 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
   }
 
   /**
-   * Updates the specified {@link Passphrase} instance in the server-based collection.
+   * Updates the specified {@link Points} instance in the server-based collection.
    */
-  public void updatePassphrase(Passphrase passphrase, boolean regenerate, int length) {
+  public void updatePassphrase(Points passphrase, boolean regenerate, int length) {
     GoogleSignInAccount account = this.account.getValue();
     if (account != null) {
       String token = getAuthorizationHeader(account);

@@ -24,9 +24,7 @@ import java.util.List;
  *
  * @author Nicholas Bennett, Todd Nordquist, Brian Bleck, Deep Dive Coding Java + Android Cohort 8
  */
-public class Passphrase implements Serializable {
-
-  private static final long serialVersionUID = -6693587121163744899L;
+public class Points {
 
   @Expose
   private long id;
@@ -35,7 +33,7 @@ public class Passphrase implements Serializable {
   private String key;
 
   @Expose
-  private List<String> words;
+  private int points;
 
   /**
    * Returns the ID of the passphrase. For an instance received from the service, this will be a
@@ -68,18 +66,18 @@ public class Passphrase implements Serializable {
   }
 
   /**
-   * Returns the passphrase itself, as a {@link List List&lt;String&gt;} of words.
+   * Returns the points
    */
-  public List<String> getWords() {
-    return words;
+  public int getPoints() {
+    return points;
   }
 
   /**
-   * Sets the passphrase from a {@link List List&lt;String&gt;} of words. To avoid issues when
+   * Sets the points. To avoid issues when
    * displaying/editing, none of the list items should contain whitespace.
    */
-  public void setWords(List<String> words) {
-    this.words = words;
+  public void setPoints(int points) {
+    this.points = points;
   }
 
 }
