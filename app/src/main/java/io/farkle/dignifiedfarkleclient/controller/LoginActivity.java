@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getSupportActionBar().hide();
     service = GoogleSignInService.getInstance();
     service.refresh()
         .addOnSuccessListener((account) -> switchToMain())
