@@ -3,6 +3,7 @@ package io.farkle.dignifiedfarkleclient.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.farkle.dignifiedfarkleclient.BuildConfig;
+import io.farkle.dignifiedfarkleclient.model.Actions;
 import io.farkle.dignifiedfarkleclient.model.Points;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -25,6 +26,9 @@ import retrofit2.http.Query;
  * singleton-pattern-based instantiation of Retrofit-generated implementation.
  */
 public interface FarkleService {
+
+  @GET("actions/")
+  Observable<List<Actions>> getAllActions(@Header("Authorization") String token);
 
   @POST("points/")
   Single<Points> post(@Header("Authorization") String token, @Body Points points);
