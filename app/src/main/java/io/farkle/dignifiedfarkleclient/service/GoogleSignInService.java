@@ -13,7 +13,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import io.farkle.dignifiedfarkleclient.BuildConfig;
 
-
 /**
  * Class implementing the singleton pattern, providing {@link LiveData} for the currently logged-in
  * {@link GoogleSignInAccount}.
