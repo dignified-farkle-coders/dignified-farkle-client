@@ -27,8 +27,13 @@ import retrofit2.http.Query;
  */
 public interface FarkleService {
 
-  @GET("actions/")
-  Observable<List<Actions>> getAllActions(@Header("Authorization") String token);
+
+//  @GET("actions/")
+//  Observable<List<Actions>> getAllActions(@Header("Authorization") String token);
+
+//  @GET("player/")
+//  Observable<List<Player>> getPlayerInfo(@Header("Authorization") String token);
+
 
   @POST("points/")
   Single<Points> post(@Header("Authorization") String token, @Body Points points);

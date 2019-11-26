@@ -12,6 +12,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "BASE_URL", '"http://10.46.2.228:8080/farkle/"'
         buildConfigField "String", "CLIENT_ID", '"176824960486-7majb2mi8j2kn2ltniqdr5j8jjp3ou79.apps.googleusercontent.com"'
+        buildConfigField "String", "AUTHORIZATION_FORMAT", '"Bearer %s"'
 
         javaCompileOptions {
             annotationProcessorOptions {
