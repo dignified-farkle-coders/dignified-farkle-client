@@ -3,6 +3,7 @@ package io.farkle.dignifiedfarkleclient.service;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -101,7 +102,7 @@ public class GoogleSignInService {
     Task<GoogleSignInAccount> task = null;
     try {
       task = GoogleSignIn.getSignedInAccountFromIntent(data);
-      account.setValue(task.getResult(ApiException.class));
+      update(task.getResult(ApiException.class));
     } catch (ApiException e) {
       update(e);
     }
@@ -121,6 +122,9 @@ public class GoogleSignInService {
   private void update(GoogleSignInAccount account) {
     this.account.setValue(account);
     this.exception.setValue(null);
+    if (account != null) {
+      Log.d(getClass().getSimpleName(), String.format(BuildConfig.AUTHORIZATION_FORMAT, account.getIdToken()));
+    }
   }
 
   private void update(Exception ex) {
