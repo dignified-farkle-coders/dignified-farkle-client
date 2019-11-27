@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import io.farkle.dignifiedfarkleclient.gamesetup.GameSetupActivity;
 
 public class StartFrag extends Fragment implements View.OnClickListener {
 
@@ -32,7 +31,7 @@ public class StartFrag extends Fragment implements View.OnClickListener {
   public void onClick(View view) {
     switch (view.getId()) {
       case R.id.play_button:
-        openGameSettupActivity();
+        openPlayGameActivity();
         break;
       case R.id.profile_button:
         openProfileActivity();
@@ -41,10 +40,6 @@ public class StartFrag extends Fragment implements View.OnClickListener {
     }
   }
 
-  private void openGameSettupActivity () {
-    Intent intent = new Intent(getContext(), GameSetupActivity.class);
-    startActivity(intent);
-  }
 
   private void openProfileActivity () {
     Intent intent = new Intent(getContext(), ProfileActivity.class);

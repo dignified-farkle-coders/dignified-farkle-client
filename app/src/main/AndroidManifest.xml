@@ -11,41 +11,6 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
     <activity
-      android:label="@string/title_activity_player_five_id"
-      android:name=".gamesetup.PlayerFiveId"
-      android:screenOrientation="landscape"
-      android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-    <activity
-      android:label="@string/title_activity_player_four_id"
-      android:name=".gamesetup.PlayerFourId"
-      android:screenOrientation="landscape"
-      android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-    <activity
-      android:label="@string/title_activity_player_three_id"
-      android:name=".gamesetup.PlayerThreeId"
-      android:screenOrientation="landscape"
-      android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-    <activity
-      android:label="@string/title_activity_player_two_id"
-      android:name=".gamesetup.PlayerTwoId"
-      android:screenOrientation="landscape"
-      android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-    <activity
-      android:label="@string/title_activity_player_one_id"
-      android:name=".gamesetup.PlayerOneId"
-      android:screenOrientation="landscape"
-      android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-    <activity
-      android:name=".gamesetup.GameSetupActivity"
-      android:screenOrientation="landscape"
-      android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-    <activity
       android:name=".PlayGameActivity"
       android:screenOrientation="landscape"
       android:theme="@style/AppTheme.NoActionBar">
