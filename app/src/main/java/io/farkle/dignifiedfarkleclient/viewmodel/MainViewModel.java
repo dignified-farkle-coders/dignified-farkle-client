@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.OnLifecycleEvent;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import io.farkle.dignifiedfarkleclient.R;
+import io.farkle.dignifiedfarkleclient.model.Player;
 import io.farkle.dignifiedfarkleclient.model.Points;
 import io.farkle.dignifiedfarkleclient.service.FarkleService;
 import io.reactivex.disposables.CompositeDisposable;
@@ -25,7 +26,7 @@ import java.util.List;
 public class MainViewModel extends AndroidViewModel implements LifecycleObserver {
 
   private final FarkleService farkleService;
-  private final MutableLiveData<List<Points>> passphrases;
+  private final MutableLiveData<List<Player>> player;
   private final MutableLiveData<GoogleSignInAccount> account;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
@@ -39,7 +40,7 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
   public MainViewModel(@NonNull Application application) {
     super(application);
     farkleService = FarkleService.getInstance();
-    passphrases = new MutableLiveData<>();
+    player = new MutableLiveData<>();
     account = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
@@ -48,8 +49,8 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
   /**
    * Returns the observable list of {@link Points} instances from the server-based collection.
    */
-  public LiveData<List<Points>> getPassphrases() {
-    return passphrases;
+  public MutableLiveData<List<Player>> getPlayer() {
+    return player;
   }
 
   /**
@@ -64,73 +65,28 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
    */
   public void setAccount(GoogleSignInAccount account) {
     this.account.setValue(account);
-    refreshPassphrases();
-  }
-
-  /**
-   * Deletes the specified {@link Points} from the server-based collection.
-   */
-  public void deletePassphrase(Points passphrase) {
-    GoogleSignInAccount account = this.account.getValue();
-    if (passphrase != null && passphrase.getId() > 0 && account != null) {
-      String token = getAuthorizationHeader(account);
-      pending.add(
-          farkleService.delete(token, passphrase.getId())
-              .subscribeOn(Schedulers.io())
-              .subscribe(() -> refreshPassphrases(account), this.throwable::postValue)
-      );
-    }
+    refreshPlayer();
   }
 
   /**
    * Request a refresh from the server of the collection of {@link Points} instances.
    */
-  public void refreshPassphrases() {
+  public void refreshPlayer() {
     GoogleSignInAccount account = this.account.getValue();
     if (account != null) {
-      refreshPassphrases(account);
+      refreshPlayer(account);
     } else {
-      passphrases.setValue(Collections.EMPTY_LIST);
+      player.setValue(Collections.EMPTY_LIST);
     }
   }
 
-  /**
-   * Adds the specified {@link Points} instance to the server-based collection.
-   */
-  public void addPassphrase(Points passphrase) {
-    GoogleSignInAccount account = this.account.getValue();
-    if (account != null) {
-      String token = getAuthorizationHeader(account);
-      pending.add(
-          farkleService.post(token, passphrase)
-              .subscribeOn(Schedulers.io())
-              .subscribe((p) -> refreshPassphrases(account), this.throwable::postValue)
-      );
-    }
-  }
-
-  /**
-   * Updates the specified {@link Points} instance in the server-based collection.
-   */
-  public void updatePassphrase(Points passphrase, boolean regenerate, int length) {
-    GoogleSignInAccount account = this.account.getValue();
-    if (account != null) {
-      String token = getAuthorizationHeader(account);
-      pending.add(
-          farkleService.put(token, passphrase.getId(), passphrase, regenerate, length)
-              .subscribeOn(Schedulers.io())
-              .subscribe((p) -> refreshPassphrases(account), this.throwable::postValue)
-      );
-    }
-  }
-
-  private void refreshPassphrases(GoogleSignInAccount account) {
+  private void refreshPlayer(GoogleSignInAccount account) {
     String token = getAuthorizationHeader(account);
-    pending.add(
-        farkleService.getAll(token)
-            .subscribeOn(Schedulers.io())
-            .subscribe(this.passphrases::postValue, this.throwable::postValue)
-    );
+//    pending.add(
+//        farkleService.getAll(token)
+//            .subscribeOn(Schedulers.io())
+//            .subscribe(this.player::postValue, this.throwable::postValue)
+//    );
   }
 
   private String getAuthorizationHeader(GoogleSignInAccount account) {
