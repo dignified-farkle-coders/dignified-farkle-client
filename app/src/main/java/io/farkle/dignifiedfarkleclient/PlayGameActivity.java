@@ -1,5 +1,6 @@
 package io.farkle.dignifiedfarkleclient;
 
+import android.graphics.Color;
 import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.util.Log;
 import android.view.View;
@@ -58,6 +59,7 @@ public class PlayGameActivity extends AppCompatActivity {
         myArray[i] = rng.nextInt(5) + 1;
       }
 
+      
       roll.setVisibility(View.GONE);
       reRoll.setVisibility(View.VISIBLE);
       stay.setVisibility(View.VISIBLE);
