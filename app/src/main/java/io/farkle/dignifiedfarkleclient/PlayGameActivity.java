@@ -26,6 +26,14 @@ public class PlayGameActivity extends AppCompatActivity {
   ImageView die5;
   ImageView die6;
   int randomDie;
+  public boolean isSelected1;
+  public boolean isSelected2;
+  public boolean isSelected3;
+  public boolean isSelected4;
+  public boolean isSelected5;
+  public boolean isSelected6;
+  public int[] myArray = new int[6];
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -53,64 +61,134 @@ public class PlayGameActivity extends AppCompatActivity {
 
     Button roll = findViewById(R.id.roll);
     roll.setOnClickListener(v -> {
-      int[] myArray = new int[6];
 
       for (int i = 0; i < myArray.length - 1; i++) {
         myArray[i] = rng.nextInt(5) + 1;
       }
 
-      
       roll.setVisibility(View.GONE);
       reRoll.setVisibility(View.VISIBLE);
       stay.setVisibility(View.VISIBLE);
 
 //      die1.setX(myArray[0]);
 //      die1.setY(myArray[myArray.length-1]);
-////      die1.setRotation(rng.nextInt(359));
-      dieImage(myArray[0],die1);
+//      die1.setRotation(rng.nextInt(359));
+      dieImage(myArray[0], die1);
       die1.setVisibility(View.VISIBLE);
+      die1.setOnClickListener(one -> {
+        if (!isSelected1) {
+          die1.setColorFilter(Color.argb(175, 57, 102, 255));
+          isSelected1 = true;
+        } else {
+          die1.setColorFilter(Color.argb(0, 0, 0, 0));
+          isSelected1 = false;
+        }
+        System.out.println(Arrays.toString(dieArray()));
+      });
 //
 //      die2.setX(myArray[1]);
 //      die2.setY(myArray[myArray.length-2]);
-////      die2.setRotation(rng.nextInt(359));
-      dieImage(myArray[1],die2);
+//      die2.setRotation(rng.nextInt(359));
+      dieImage(myArray[1], die2);
       die2.setVisibility(View.VISIBLE);
+      die2.setOnClickListener(one -> {
+        if (!isSelected2) {
+          die2.setColorFilter(Color.argb(175, 57, 102, 255));
+          isSelected2 = true;
+        } else {
+          die2.setColorFilter(Color.argb(0, 0, 0, 0));
+          isSelected2 = false;
+        }
+        System.out.println(Arrays.toString(dieArray()));
+      });
 //
 //      die3.setX(myArray[2]);
 //      die3.setY(myArray[myArray.length-3]);
-////      die3.setRotation(rng.nextInt(359));
-      dieImage(myArray[2],die3);
+//      die3.setRotation(rng.nextInt(359));
+      dieImage(myArray[2], die3);
       die3.setVisibility(View.VISIBLE);
+      die3.setOnClickListener(one -> {
+        if (!isSelected3) {
+          die3.setColorFilter(Color.argb(175, 57, 102, 255));
+          isSelected3 = true;
+        } else {
+          die3.setColorFilter(Color.argb(0, 0, 0, 0));
+          isSelected3 = false;
+        }
+        System.out.println(Arrays.toString(dieArray()));
+      });
 //
 //      die4.setX(myArray[3]);
 //      die4.setY(myArray[myArray.length-4]);
-////      die4.setRotation(rng.nextInt(359));
-      dieImage(myArray[3],die4);
+//      die4.setRotation(rng.nextInt(359));
+      dieImage(myArray[3], die4);
       die4.setVisibility(View.VISIBLE);
+      die4.setOnClickListener(one -> {
+        if (!isSelected4) {
+          die4.setColorFilter(Color.argb(175, 57, 102, 255));
+          isSelected4 = true;
+        } else {
+          die4.setColorFilter(Color.argb(0, 0, 0, 0));
+          isSelected4 = false;
+        }
+        System.out.println(Arrays.toString(dieArray()));
+      });
 //
 //      die5.setX(myArray[4]);
 //      die5.setY(myArray[myArray.length-5]);
-////      die5.setRotation(rng.nextInt(359));
-      dieImage(myArray[4],die5);
+//      die5.setRotation(rng.nextInt(359));
+      dieImage(myArray[4], die5);
       die5.setVisibility(View.VISIBLE);
+      die5.setOnClickListener(one -> {
+        if (!isSelected5) {
+          die5.setColorFilter(Color.argb(175, 57, 102, 255));
+          isSelected5 = true;
+        } else {
+          die5.setColorFilter(Color.argb(0, 0, 0, 0));
+          isSelected5 = false;
+        }
+        System.out.println(Arrays.toString(dieArray()));
+      });
 //
 //      die6.setX(myArray[5]);
 //      die6.setY(myArray[myArray.length-6]);
-////      die6.setRotation(rng.nextInt(359));
-      dieImage(myArray[5],die6);
+//      die6.setRotation(rng.nextInt(359));
+      dieImage(myArray[5], die6);
       die6.setVisibility(View.VISIBLE);
+      die6.setOnClickListener(one -> {
+        if (!isSelected6) {
+          die6.setColorFilter(Color.argb(175, 57, 102, 255));
+          isSelected6 = true;
+        } else {
+          die6.setColorFilter(Color.argb(0, 0, 0, 0));
+          isSelected6 = false;
+        }
+        System.out.println(Arrays.toString(dieArray()));
+      });
+
     });
 
     reRoll.setOnClickListener(v -> {
-      reRoll.setVisibility(View.GONE);
-      roll.setVisibility(View.VISIBLE);
-      stay.setVisibility(View.GONE);
+      clearScreen(die1, die2, die3, die4, die5, die6, reRoll, stay, roll, View.VISIBLE, View.GONE);
+
     });
     stay.setOnClickListener(v -> {
-      stay.setVisibility(View.GONE);
-      reRoll.setVisibility(View.GONE);
-      roll.setVisibility(View.VISIBLE);
+      clearScreen(die1, die2, die3, die4, die5, die6, stay, roll, reRoll, View.GONE, View.VISIBLE);
     });
+  }
+
+  private void clearScreen(ImageView die1, ImageView die2, ImageView die3, ImageView die4,
+      ImageView die5, ImageView die6, Button reRoll, Button stay, Button roll, int visible,
+      int gone) {
+    reRoll.setVisibility(View.GONE);
+    roll.setVisibility(visible);
+    stay.setVisibility(gone);
+    die1.setVisibility(View.GONE);
+    die2.setVisibility(View.GONE);
+    die3.setVisibility(View.GONE);
+    die4.setVisibility(View.GONE);
+    die5.setVisibility(View.GONE);
+    die6.setVisibility(View.GONE);
   }
 
   private void dieImage(int value, ImageView die) {
@@ -132,6 +210,46 @@ public class PlayGameActivity extends AppCompatActivity {
     if (value == 6) {
       die.setImageResource(R.drawable.generic_6);
     }
+  }
+
+  private int[] dieArray() {
+    int[] returnArray = new int[6];
+    if (isSelected1) {
+      returnArray[0] = myArray[0];
+    } else {
+      returnArray[0] = 0;
+    }
+
+    if (isSelected2) {
+      returnArray[1] = myArray[1];
+    } else {
+      returnArray[1] = 0;
+    }
+
+    if (isSelected3) {
+      returnArray[2] = myArray[2];
+    } else {
+      returnArray[2] = 0;
+    }
+
+    if (isSelected4) {
+      returnArray[3] = myArray[3];
+    } else {
+      returnArray[3] = 0;
+    }
+
+    if (isSelected5) {
+      returnArray[4] = myArray[4];
+    } else {
+      returnArray[4] = 0;
+    }
+
+    if (isSelected6) {
+      returnArray[5] = myArray[5];
+    } else {
+      returnArray[5] = 0;
+    }
+    return returnArray;
   }
 
 }
