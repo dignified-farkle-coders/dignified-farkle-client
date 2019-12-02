@@ -16,8 +16,15 @@ import java.util.Random;
 
 public class PlayGameActivity extends AppCompatActivity {
 
-  private static final String TAG = "playgameactivity" ;
+  private static final String TAG = "playgameactivity";
   Random rng = new Random();
+  ImageView die1;
+  ImageView die2;
+  ImageView die3;
+  ImageView die4;
+  ImageView die5;
+  ImageView die6;
+  int randomDie;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,40 +52,51 @@ public class PlayGameActivity extends AppCompatActivity {
 
     Button roll = findViewById(R.id.roll);
     roll.setOnClickListener(v -> {
-      int [] myArray = new int[12];
-      myArray = RandomXYPositions.method();
+      int[] myArray = new int[6];
+
+      for (int i = 0; i < myArray.length - 1; i++) {
+        myArray[i] = rng.nextInt(5) + 1;
+      }
+
       roll.setVisibility(View.GONE);
       reRoll.setVisibility(View.VISIBLE);
+      stay.setVisibility(View.VISIBLE);
 
 //      die1.setX(myArray[0]);
 //      die1.setY(myArray[myArray.length-1]);
 ////      die1.setRotation(rng.nextInt(359));
-        die1.setVisibility(View.VISIBLE);
+      dieImage(myArray[0],die1);
+      die1.setVisibility(View.VISIBLE);
 //
 //      die2.setX(myArray[1]);
 //      die2.setY(myArray[myArray.length-2]);
 ////      die2.setRotation(rng.nextInt(359));
-        die2.setVisibility(View.VISIBLE);
+      dieImage(myArray[1],die2);
+      die2.setVisibility(View.VISIBLE);
 //
 //      die3.setX(myArray[2]);
 //      die3.setY(myArray[myArray.length-3]);
 ////      die3.setRotation(rng.nextInt(359));
-        die3.setVisibility(View.VISIBLE);
+      dieImage(myArray[2],die3);
+      die3.setVisibility(View.VISIBLE);
 //
 //      die4.setX(myArray[3]);
 //      die4.setY(myArray[myArray.length-4]);
 ////      die4.setRotation(rng.nextInt(359));
-        die4.setVisibility(View.VISIBLE);
+      dieImage(myArray[3],die4);
+      die4.setVisibility(View.VISIBLE);
 //
 //      die5.setX(myArray[4]);
 //      die5.setY(myArray[myArray.length-5]);
 ////      die5.setRotation(rng.nextInt(359));
-        die5.setVisibility(View.VISIBLE);
+      dieImage(myArray[4],die5);
+      die5.setVisibility(View.VISIBLE);
 //
 //      die6.setX(myArray[5]);
 //      die6.setY(myArray[myArray.length-6]);
 ////      die6.setRotation(rng.nextInt(359));
-        die6.setVisibility(View.VISIBLE);
+      dieImage(myArray[5],die6);
+      die6.setVisibility(View.VISIBLE);
     });
 
     reRoll.setOnClickListener(v -> {
@@ -91,6 +109,27 @@ public class PlayGameActivity extends AppCompatActivity {
       reRoll.setVisibility(View.GONE);
       roll.setVisibility(View.VISIBLE);
     });
+  }
+
+  private void dieImage(int value, ImageView die) {
+    if (value == 1) {
+      die.setImageResource(R.drawable.generic_1);
+    }
+    if (value == 2) {
+      die.setImageResource(R.drawable.generic_2);
+    }
+    if (value == 3) {
+      die.setImageResource(R.drawable.generic_3);
+    }
+    if (value == 4) {
+      die.setImageResource(R.drawable.generic_4);
+    }
+    if (value == 5) {
+      die.setImageResource(R.drawable.generic_5);
+    }
+    if (value == 6) {
+      die.setImageResource(R.drawable.generic_6);
+    }
   }
 
 }
