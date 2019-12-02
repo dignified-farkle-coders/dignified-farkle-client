@@ -29,38 +29,36 @@ public class PlayGameActivity extends AppCompatActivity {
 
     Button roll = findViewById(R.id.roll);
     roll.setOnClickListener(v -> {
+      int [] myArray = new int[12];
+      myArray = RandomXYPositions.method();
+      Log.d(TAG, "MyArray " + Arrays.toString(myArray));
       roll.setVisibility(View.GONE);
       submit.setVisibility(View.VISIBLE);
 
-      ConstraintSet set = new ConstraintSet();
       ImageView die1 = findViewById(R.id.die_1);
       ImageView die2 = findViewById(R.id.die_2);
       ImageView die3 = findViewById(R.id.die_3);
       ImageView die4 = findViewById(R.id.die_4);
       ImageView die5 = findViewById(R.id.die_5);
       ImageView die6 = findViewById(R.id.die_6);
-      ConstraintLayout farkle_time = findViewById(R.id.farkle_time);
-      set.clone(farkle_time);
 
-      set.setVerticalBias(R.id.die_1, (float) Math.random());
-      die1.setVisibility(View.VISIBLE);
+      die1.setX(myArray[0]);
+      die1.setY(myArray[myArray.length-1]);
 
-      set.setVerticalBias(R.id.die_2, (float) Math.random());
-      die2.setVisibility(View.VISIBLE);
+      die2.setX(myArray[1]);
+      die2.setY(myArray[myArray.length-2]);
 
-      set.setVerticalBias(R.id.die_3, (float) Math.random());
-      die3.setVisibility(View.VISIBLE);
+      die3.setX(myArray[2]);
+      die3.setY(myArray[myArray.length-3]);
 
-      set.setVerticalBias(R.id.die_4, (float) Math.random());
-      die4.setVisibility(View.VISIBLE);
+      die4.setX(myArray[3]);
+      die4.setY(myArray[myArray.length-4]);
 
-      set.setVerticalBias(R.id.die_5, (float) Math.random());
-      die5.setVisibility(View.VISIBLE);
+      die5.setX(myArray[4]);
+      die5.setY(myArray[myArray.length-5]);
 
-      set.setVerticalBias(R.id.die_6, (float) Math.random());
-      die6.setVisibility(View.VISIBLE);
-
-      set.applyTo(farkle_time);
+      die6.setX(myArray[5]);
+      die6.setY(myArray[myArray.length-6]);
 
     });
 
