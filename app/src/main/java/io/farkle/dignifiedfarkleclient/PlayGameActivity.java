@@ -61,9 +61,10 @@ public class PlayGameActivity extends AppCompatActivity {
       isSelected6 = false;
       die6.setColorFilter(null);
 
-      for (int i = 0; i < myArray.length - 1; i++) {
+      for (int i = 0; i < myArray.length; i++) {
         myArray[i] = rng.nextInt(5) + 1;
       }
+      System.out.println("MyArray: " + Arrays.toString(myArray));
 
       roll.setVisibility(View.GONE);
       reRoll.setVisibility(View.VISIBLE);
