@@ -24,46 +24,71 @@ public class PlayGameActivity extends AppCompatActivity {
     setContentView(R.layout.activity_play_game);
     super.onCreate(savedInstanceState);
 
-    Button submit = findViewById(R.id.submit);
-    submit.setVisibility(View.GONE);
+    ImageView die1 = findViewById(R.id.die_1);
+    die1.setVisibility(View.GONE);
+    ImageView die2 = findViewById(R.id.die_2);
+    die2.setVisibility(View.GONE);
+    ImageView die3 = findViewById(R.id.die_3);
+    die3.setVisibility(View.GONE);
+    ImageView die4 = findViewById(R.id.die_4);
+    die4.setVisibility(View.GONE);
+    ImageView die5 = findViewById(R.id.die_5);
+    die5.setVisibility(View.GONE);
+    ImageView die6 = findViewById(R.id.die_6);
+    die6.setVisibility(View.GONE);
+
+    Button reRoll = findViewById(R.id.re_roll);
+    reRoll.setVisibility(View.GONE);
+
+    Button stay = findViewById(R.id.stay);
+    stay.setVisibility(View.GONE);
 
     Button roll = findViewById(R.id.roll);
     roll.setOnClickListener(v -> {
       int [] myArray = new int[12];
       myArray = RandomXYPositions.method();
-      Log.d(TAG, "MyArray " + Arrays.toString(myArray));
       roll.setVisibility(View.GONE);
-      submit.setVisibility(View.VISIBLE);
+      reRoll.setVisibility(View.VISIBLE);
 
-      ImageView die1 = findViewById(R.id.die_1);
-      ImageView die2 = findViewById(R.id.die_2);
-      ImageView die3 = findViewById(R.id.die_3);
-      ImageView die4 = findViewById(R.id.die_4);
-      ImageView die5 = findViewById(R.id.die_5);
-      ImageView die6 = findViewById(R.id.die_6);
-
-      die1.setX(myArray[0]);
-      die1.setY(myArray[myArray.length-1]);
-
-      die2.setX(myArray[1]);
-      die2.setY(myArray[myArray.length-2]);
-
-      die3.setX(myArray[2]);
-      die3.setY(myArray[myArray.length-3]);
-
-      die4.setX(myArray[3]);
-      die4.setY(myArray[myArray.length-4]);
-
-      die5.setX(myArray[4]);
-      die5.setY(myArray[myArray.length-5]);
-
-      die6.setX(myArray[5]);
-      die6.setY(myArray[myArray.length-6]);
-
+//      die1.setX(myArray[0]);
+//      die1.setY(myArray[myArray.length-1]);
+////      die1.setRotation(rng.nextInt(359));
+        die1.setVisibility(View.VISIBLE);
+//
+//      die2.setX(myArray[1]);
+//      die2.setY(myArray[myArray.length-2]);
+////      die2.setRotation(rng.nextInt(359));
+        die2.setVisibility(View.VISIBLE);
+//
+//      die3.setX(myArray[2]);
+//      die3.setY(myArray[myArray.length-3]);
+////      die3.setRotation(rng.nextInt(359));
+        die3.setVisibility(View.VISIBLE);
+//
+//      die4.setX(myArray[3]);
+//      die4.setY(myArray[myArray.length-4]);
+////      die4.setRotation(rng.nextInt(359));
+        die4.setVisibility(View.VISIBLE);
+//
+//      die5.setX(myArray[4]);
+//      die5.setY(myArray[myArray.length-5]);
+////      die5.setRotation(rng.nextInt(359));
+        die5.setVisibility(View.VISIBLE);
+//
+//      die6.setX(myArray[5]);
+//      die6.setY(myArray[myArray.length-6]);
+////      die6.setRotation(rng.nextInt(359));
+        die6.setVisibility(View.VISIBLE);
     });
 
-    submit.setOnClickListener(v -> {
-      submit.setVisibility(View.GONE);
+    reRoll.setOnClickListener(v -> {
+      reRoll.setVisibility(View.GONE);
+      roll.setVisibility(View.VISIBLE);
+      stay.setVisibility(View.GONE);
+    });
+    stay.setOnClickListener(v -> {
+      stay.setVisibility(View.GONE);
+      reRoll.setVisibility(View.GONE);
       roll.setVisibility(View.VISIBLE);
     });
   }

@@ -30,13 +30,22 @@
     app:layout_constraintRight_toRightOf="parent"/>
 
   <Button
-    android:id="@+id/submit"
+    android:id="@+id/re_roll"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toLeftOf="@id/stay"
+    android:text="Re-Roll?"/>
+
+  <Button
+    android:id="@+id/stay"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toRightOf="@id/re_roll"
     app:layout_constraintRight_toRightOf="parent"
-    android:text="Submit"/>
+    android:text="Stay?"/>
 
     <ImageView
       android:id="@+id/die_1"
@@ -48,6 +57,7 @@
       app:layout_constraintTop_toBottomOf="@id/guideline"
       app:layout_constraintBottom_toTopOf="@id/guideline2"/>
 
+
     <ImageView
       android:id="@+id/die_2"
       android:src="@drawable/generic_2"
@@ -58,6 +68,7 @@
       app:layout_constraintLeft_toRightOf="@id/die_1"
       app:layout_constraintRight_toLeftOf="@id/die_3"/>
 
+
     <ImageView
       android:id="@+id/die_3"
       android:src="@drawable/generic_3"
@@ -67,6 +78,7 @@
       app:layout_constraintBottom_toTopOf="@id/guideline2"
       app:layout_constraintLeft_toRightOf="@id/die_2"
       app:layout_constraintRight_toLeftOf="@id/die_4"/>
+
 
     <ImageView
       android:id="@+id/die_4"
@@ -97,6 +109,7 @@
       app:layout_constraintBottom_toTopOf="@id/guideline2"
       app:layout_constraintLeft_toRightOf="@id/die_5"
       app:layout_constraintRight_toRightOf="parent"/>
+
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/guideline"
