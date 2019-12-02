@@ -1,17 +1,11 @@
 package io.farkle.dignifiedfarkleclient;
 
 import android.graphics.Color;
-import android.provider.ContactsContract.CommonDataKinds.Im;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import io.farkle.dignifiedfarkleclient.model.pojo.RandomXYPositions;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -19,13 +13,6 @@ public class PlayGameActivity extends AppCompatActivity {
 
   private static final String TAG = "playgameactivity";
   Random rng = new Random();
-  ImageView die1;
-  ImageView die2;
-  ImageView die3;
-  ImageView die4;
-  ImageView die5;
-  ImageView die6;
-  int randomDie;
   public boolean isSelected1;
   public boolean isSelected2;
   public boolean isSelected3;
@@ -61,6 +48,18 @@ public class PlayGameActivity extends AppCompatActivity {
 
     Button roll = findViewById(R.id.roll);
     roll.setOnClickListener(v -> {
+      isSelected1 = false;
+      die1.setColorFilter(null);
+      isSelected2 = false;
+      die2.setColorFilter(null);
+      isSelected3 = false;
+      die3.setColorFilter(null);
+      isSelected4 = false;
+      die4.setColorFilter(null);
+      isSelected5 = false;
+      die5.setColorFilter(null);
+      isSelected6 = false;
+      die6.setColorFilter(null);
 
       for (int i = 0; i < myArray.length - 1; i++) {
         myArray[i] = rng.nextInt(5) + 1;
@@ -70,9 +69,6 @@ public class PlayGameActivity extends AppCompatActivity {
       reRoll.setVisibility(View.VISIBLE);
       stay.setVisibility(View.VISIBLE);
 
-//      die1.setX(myArray[0]);
-//      die1.setY(myArray[myArray.length-1]);
-//      die1.setRotation(rng.nextInt(359));
       dieImage(myArray[0], die1);
       die1.setVisibility(View.VISIBLE);
       die1.setOnClickListener(one -> {
@@ -80,15 +76,12 @@ public class PlayGameActivity extends AppCompatActivity {
           die1.setColorFilter(Color.argb(175, 57, 102, 255));
           isSelected1 = true;
         } else {
-          die1.setColorFilter(Color.argb(0, 0, 0, 0));
+          die1.setColorFilter(null);
           isSelected1 = false;
         }
         System.out.println(Arrays.toString(dieArray()));
       });
-//
-//      die2.setX(myArray[1]);
-//      die2.setY(myArray[myArray.length-2]);
-//      die2.setRotation(rng.nextInt(359));
+
       dieImage(myArray[1], die2);
       die2.setVisibility(View.VISIBLE);
       die2.setOnClickListener(one -> {
@@ -96,15 +89,12 @@ public class PlayGameActivity extends AppCompatActivity {
           die2.setColorFilter(Color.argb(175, 57, 102, 255));
           isSelected2 = true;
         } else {
-          die2.setColorFilter(Color.argb(0, 0, 0, 0));
+          die2.setColorFilter(null);
           isSelected2 = false;
         }
         System.out.println(Arrays.toString(dieArray()));
       });
-//
-//      die3.setX(myArray[2]);
-//      die3.setY(myArray[myArray.length-3]);
-//      die3.setRotation(rng.nextInt(359));
+
       dieImage(myArray[2], die3);
       die3.setVisibility(View.VISIBLE);
       die3.setOnClickListener(one -> {
@@ -112,15 +102,12 @@ public class PlayGameActivity extends AppCompatActivity {
           die3.setColorFilter(Color.argb(175, 57, 102, 255));
           isSelected3 = true;
         } else {
-          die3.setColorFilter(Color.argb(0, 0, 0, 0));
+          die3.setColorFilter(null);
           isSelected3 = false;
         }
         System.out.println(Arrays.toString(dieArray()));
       });
-//
-//      die4.setX(myArray[3]);
-//      die4.setY(myArray[myArray.length-4]);
-//      die4.setRotation(rng.nextInt(359));
+
       dieImage(myArray[3], die4);
       die4.setVisibility(View.VISIBLE);
       die4.setOnClickListener(one -> {
@@ -128,15 +115,12 @@ public class PlayGameActivity extends AppCompatActivity {
           die4.setColorFilter(Color.argb(175, 57, 102, 255));
           isSelected4 = true;
         } else {
-          die4.setColorFilter(Color.argb(0, 0, 0, 0));
+          die4.setColorFilter(null);
           isSelected4 = false;
         }
         System.out.println(Arrays.toString(dieArray()));
       });
-//
-//      die5.setX(myArray[4]);
-//      die5.setY(myArray[myArray.length-5]);
-//      die5.setRotation(rng.nextInt(359));
+
       dieImage(myArray[4], die5);
       die5.setVisibility(View.VISIBLE);
       die5.setOnClickListener(one -> {
@@ -144,15 +128,12 @@ public class PlayGameActivity extends AppCompatActivity {
           die5.setColorFilter(Color.argb(175, 57, 102, 255));
           isSelected5 = true;
         } else {
-          die5.setColorFilter(Color.argb(0, 0, 0, 0));
+          die5.setColorFilter(null);
           isSelected5 = false;
         }
         System.out.println(Arrays.toString(dieArray()));
       });
-//
-//      die6.setX(myArray[5]);
-//      die6.setY(myArray[myArray.length-6]);
-//      die6.setRotation(rng.nextInt(359));
+
       dieImage(myArray[5], die6);
       die6.setVisibility(View.VISIBLE);
       die6.setOnClickListener(one -> {
@@ -160,7 +141,7 @@ public class PlayGameActivity extends AppCompatActivity {
           die6.setColorFilter(Color.argb(175, 57, 102, 255));
           isSelected6 = true;
         } else {
-          die6.setColorFilter(Color.argb(0, 0, 0, 0));
+          die6.setColorFilter(null);
           isSelected6 = false;
         }
         System.out.println(Arrays.toString(dieArray()));
@@ -174,6 +155,10 @@ public class PlayGameActivity extends AppCompatActivity {
     });
     stay.setOnClickListener(v -> {
       clearScreen(die1, die2, die3, die4, die5, die6, stay, roll, reRoll, View.GONE, View.VISIBLE);
+      for (int i = 0; i < dieArray().length - 1 ; i++) {
+          dieArray[i] = dieArray()[i] * -1;
+        System.out.println(Arrays.toString(dieArray()));
+      }
     });
   }
 
