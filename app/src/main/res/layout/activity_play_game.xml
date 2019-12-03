@@ -45,7 +45,7 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toRightOf="@id/re_roll"
     app:layout_constraintRight_toRightOf="parent"
-    android:text="Stay?"/>
+    android:text="End Turn?"/>
 
     <ImageView
       android:id="@+id/die_1"

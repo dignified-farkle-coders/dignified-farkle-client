@@ -1,6 +1,7 @@
 package io.farkle.dignifiedfarkleclient;
 
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,15 +13,14 @@ import java.util.Random;
 public class PlayGameActivity extends AppCompatActivity {
 
   private static final String TAG = "playgameactivity";
-  Random rng = new Random();
-  public boolean isSelected1;
-  public boolean isSelected2;
-  public boolean isSelected3;
-  public boolean isSelected4;
-  public boolean isSelected5;
-  public boolean isSelected6;
-  public int[] myArray = new int[6];
-
+  private Random rng = new Random();
+  private boolean isSelected1;
+  private boolean isSelected2;
+  private boolean isSelected3;
+  private boolean isSelected4;
+  private boolean isSelected5;
+  private boolean isSelected6;
+  private int[] myArray = new int[6];
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,9 @@ public class PlayGameActivity extends AppCompatActivity {
 
     Button roll = findViewById(R.id.roll);
     roll.setOnClickListener(v -> {
+      MediaPlayer diceRoll = MediaPlayer.create(this, R.raw.dice_roll);
+      diceRoll.start();
+
       isSelected1 = false;
       die1.setColorFilter(null);
       isSelected2 = false;
@@ -157,7 +160,7 @@ public class PlayGameActivity extends AppCompatActivity {
     stay.setOnClickListener(v -> {
       clearScreen(die1, die2, die3, die4, die5, die6, stay, roll, reRoll, View.GONE, View.VISIBLE);
       int[] returnArray = dieArray();
-      for (int i = 0; i < dieArray().length - 1 ; i++) {
+      for (int i = 0; i < dieArray().length ; i++) {
           returnArray[i] = returnArray[i] * -1;
       }
       System.out.println(Arrays.toString(returnArray));
