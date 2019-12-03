@@ -1,0 +1,88 @@
+package io.farkle.dignifiedfarkleclient.model.entity;
+
+import java.util.Date;
+
+public class Action {
+
+  private long actionId;
+
+  private Date created;
+
+  private Game game;
+
+  private Player player;
+
+  private Player nextPlayer;
+
+  private int[] availableDice;
+
+  private int[] frozenDice;
+
+  private boolean stay;
+
+  private int turn;
+
+  public long getActionId() {
+    return actionId;
+  }
+
+  public Date getCreated() {
+    return created;
+  }
+
+  public Game getGame() {
+    return game;
+  }
+
+  public void setGame(Game game) {
+    this.game = game;
+  }
+
+  public Player getPlayer() {
+    return player;
+  }
+
+  public void setPlayer(Player player) {
+    this.player = player;
+  }
+
+  public Player getNextPlayer() {
+    return nextPlayer;
+  }
+
+  public void setNextPlayer(Player nextPlayer) {
+    this.nextPlayer = nextPlayer;
+  }
+
+  public int[] getAvailableDice() {
+    return availableDice;
+  }
+
+  public void setAvailableDice(int[] availableDice) {
+    this.availableDice = availableDice;
+  }
+
+  public int[] getFrozenDice() {
+    return frozenDice;
+  }
+
+  public void setFrozenDice(int[] frozenDice) {
+    this.frozenDice = frozenDice;
+  }
+
+  public boolean getStay() {
+    return stay;
+  }
+
+  public void setStay(boolean stay) {
+    this.stay = stay;
+  }
+
+  public int getTurn() {
+    return turn;
+  }
+
+  public void setTurn(int turn) {
+    this.turn = turn;
+  }
+}

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import io.farkle.dignifiedfarkleclient.service.FarkleService;
 
 public class StartFrag extends Fragment implements View.OnClickListener {
 

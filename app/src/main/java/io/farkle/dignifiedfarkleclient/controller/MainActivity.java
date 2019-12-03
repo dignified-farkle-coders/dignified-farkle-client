@@ -18,20 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import io.farkle.dignifiedfarkleclient.MarketFrag;
 import io.farkle.dignifiedfarkleclient.R;
 import io.farkle.dignifiedfarkleclient.StartFrag;
 import io.farkle.dignifiedfarkleclient.TournamentFrag;
-import io.farkle.dignifiedfarkleclient.model.Points;
+import io.farkle.dignifiedfarkleclient.service.FarkleService;
 import io.farkle.dignifiedfarkleclient.service.GoogleSignInService;
-import io.farkle.dignifiedfarkleclient.view.FarkleAdapter.OnClickListener;
-import io.farkle.dignifiedfarkleclient.view.FarkleAdapter.OnContextListener;
 import io.farkle.dignifiedfarkleclient.viewmodel.MainViewModel;
 
-public class MainActivity extends AppCompatActivity
-    implements OnClickListener, OnContextListener, OnCompleteListener {
+public class MainActivity extends AppCompatActivity {
 
   private ProgressBar waiting;
   private MainViewModel viewModel;
@@ -95,18 +91,7 @@ public class MainActivity extends AppCompatActivity
     return handled;
   }
 
-  @Override
   public void onComplete(@NonNull Task task) {
-
-  }
-
-  @Override
-  public void onClick(View view, int position, Points passphrase) {
-
-  }
-
-  @Override
-  public void onLongPress(Menu menu, int position, Points passphrase) {
 
   }
 
