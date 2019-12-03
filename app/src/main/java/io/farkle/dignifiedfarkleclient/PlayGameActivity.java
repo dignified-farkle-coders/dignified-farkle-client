@@ -156,10 +156,11 @@ public class PlayGameActivity extends AppCompatActivity {
     });
     stay.setOnClickListener(v -> {
       clearScreen(die1, die2, die3, die4, die5, die6, stay, roll, reRoll, View.GONE, View.VISIBLE);
+      int[] returnArray = dieArray();
       for (int i = 0; i < dieArray().length - 1 ; i++) {
-          dieArray[i] = dieArray()[i] * -1;
-        System.out.println(Arrays.toString(dieArray()));
+          returnArray[i] = returnArray[i] * -1;
       }
+      System.out.println(Arrays.toString(returnArray));
     });
   }
 
@@ -198,7 +199,7 @@ public class PlayGameActivity extends AppCompatActivity {
     }
   }
 
-  private int[] dieArray() {
+  public int[] dieArray() {
     int[] returnArray = new int[6];
     if (isSelected1) {
       returnArray[0] = myArray[0];
