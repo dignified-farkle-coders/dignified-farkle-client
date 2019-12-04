@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
           .setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
       button = rootView.findViewById(R.id.profile_button);
       button.setOnClickListener(this);
-      playButton = rootView.findViewById(R.id.play_button);
+      playButton = rootView.findViewById(R.id.find_game);
       playButton.setOnClickListener(this);
       return rootView;
     }

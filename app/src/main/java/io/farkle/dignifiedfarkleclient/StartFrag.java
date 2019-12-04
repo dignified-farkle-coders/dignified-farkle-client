@@ -23,7 +23,7 @@ public class StartFrag extends Fragment implements View.OnClickListener {
     view = inflater.inflate(R.layout.fragment_start, container, false);
     button = view.findViewById(R.id.profile_button);
     button.setOnClickListener(this);
-    playButton = view.findViewById(R.id.play_button);
+    playButton = view.findViewById(R.id.find_game);
     playButton.setOnClickListener(this);
     return view;
   }
@@ -31,7 +31,7 @@ public class StartFrag extends Fragment implements View.OnClickListener {
   @Override
   public void onClick(View view) {
     switch (view.getId()) {
-      case R.id.play_button:
+      case R.id.find_game:
         openPlayGameActivity();
         break;
       case R.id.profile_button:
