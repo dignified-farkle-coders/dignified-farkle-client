@@ -1,27 +1,35 @@
 package io.farkle.dignifiedfarkleclient.model.entity;
 
+import com.google.gson.annotations.Expose;
 import java.util.Date;
 
 public class Action {
 
+  @Expose
   private long actionId;
 
+  @Expose
   private Date created;
-
+  @Expose
   private Game game;
 
+  @Expose
   private Player player;
 
+  @Expose
   private Player nextPlayer;
 
+  @Expose
   private int[] availableDice;
 
+  @Expose
   private int[] frozenDice;
 
+  @Expose
   private boolean stay;
 
+  @Expose
   private int turn;
-
   public long getActionId() {
     return actionId;
   }

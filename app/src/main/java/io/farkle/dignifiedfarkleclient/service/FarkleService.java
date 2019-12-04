@@ -3,9 +3,10 @@ package io.farkle.dignifiedfarkleclient.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.farkle.dignifiedfarkleclient.BuildConfig;
+import io.farkle.dignifiedfarkleclient.model.GamePreferences;
 import io.farkle.dignifiedfarkleclient.model.entity.Action;
+import io.farkle.dignifiedfarkleclient.model.entity.Game;
 import io.farkle.dignifiedfarkleclient.model.entity.Player;
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.util.List;
@@ -16,13 +17,9 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * Declaration of proxy methods used to connect to Diceware server application, with
@@ -39,6 +36,9 @@ public interface FarkleService {
 
   @GET("player/")
   Observable<List<Player>> getPlayerInfo(@Header("Authorization") String token);
+
+  @POST("games/join")
+  Single<Game> post(@Header("Authorization") String token, @Body GamePreferences preferences);
 
 //  @POST("points/")
 //  Single<Points> post(@Header("Authorization") String token, @Body Points points);

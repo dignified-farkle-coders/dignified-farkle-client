@@ -16,9 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import android.widget.TextView;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import io.farkle.dignifiedfarkleclient.MarketFrag;
 import io.farkle.dignifiedfarkleclient.R;
 import io.farkle.dignifiedfarkleclient.StartFrag;
@@ -40,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     SectionsPagerAdapter mSectionsPagerAdapter =
         new SectionsPagerAdapter(getSupportFragmentManager());
-
 
     setupSignIn();
     ViewPager mViewPager = findViewById(R.id.container);

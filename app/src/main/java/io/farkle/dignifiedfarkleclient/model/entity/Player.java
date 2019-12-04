@@ -1,5 +1,6 @@
 package io.farkle.dignifiedfarkleclient.model.entity;
 
+import com.google.gson.annotations.Expose;
 import io.farkle.dignifiedfarkleclient.model.entity.Game;
 import io.farkle.dignifiedfarkleclient.model.entity.GamePlayer;
 import java.util.Date;
@@ -8,12 +9,16 @@ import java.util.List;
 
 public class Player {
 
+  @Expose
   private long id;
 
+  @Expose
   private Date created;
 
+  @Expose
   private String oauthKey;
 
+  @Expose
   private String displayName;
 
   private List<GamePlayer> gamePlayers = new LinkedList<>();

@@ -1,25 +1,34 @@
 package io.farkle.dignifiedfarkleclient.model.entity;
 
+import com.google.gson.annotations.Expose;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Game {
 
+  @Expose
   private long id;
 
+  @Expose
   private Date created;
 
+  @Expose
   private int preferredNumPlayers;
 
+  @Expose
   private List<GamePlayer> gamePlayers = new LinkedList<>();
 
+  @Expose
   private List<Action> actions = new LinkedList<>();
 
+  @Expose
   private Player winner;
 
+  @Expose
   private State state;
 
+  @Expose
   private int numberOfRounds;
 
   public long getId() {

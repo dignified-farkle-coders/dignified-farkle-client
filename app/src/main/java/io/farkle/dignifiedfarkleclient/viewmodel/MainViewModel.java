@@ -10,10 +10,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.OnLifecycleEvent;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import io.farkle.dignifiedfarkleclient.BuildConfig;
 import io.farkle.dignifiedfarkleclient.R;
+import io.farkle.dignifiedfarkleclient.model.GamePreferences;
 import io.farkle.dignifiedfarkleclient.model.entity.Game;
 import io.farkle.dignifiedfarkleclient.model.entity.Player;
 import io.farkle.dignifiedfarkleclient.service.FarkleService;
+import io.farkle.dignifiedfarkleclient.service.GoogleSignInService;
+import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Collections;
@@ -21,8 +25,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainViewModel extends AndroidViewModel implements LifecycleObserver {
+public class MainViewModel<TAG> extends AndroidViewModel implements LifecycleObserver {
 
+  private static final Object TAG = "MainView";
   private final FarkleService farkleService;
   private final MutableLiveData<List<Player>> player;
   private final MutableLiveData<GoogleSignInAccount> account;
@@ -31,17 +36,17 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
 
   private final CompositeDisposable pending;
 
-  public MainViewModel(@NonNull Application application,
-      MutableLiveData<Game> game) {
+  public MainViewModel(@NonNull Application application) {
     super(application);
-    this.game = game;
     farkleService = FarkleService.getInstance();
     player = new MutableLiveData<>();
+    game = new MutableLiveData<>();
     account = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
     Timer timer = new Timer();
-    timer.schedule(new Poll(), 15000, 15000);
+//    timer.schedule(new Poll(), 15000, 15000);
+    refreshAccount();
   }
 
   public MutableLiveData<List<Player>> getPlayer() {
@@ -52,10 +57,10 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
     return throwable;
   }
 
-  public void setAccount(GoogleSignInAccount account) {
-    this.account.setValue(account);
-    refreshPlayer();
+  public void startRound() {
+      refreshPlayer();
   }
+
 
   public void refreshPlayer() {
     GoogleSignInAccount account = this.account.getValue();
@@ -73,18 +78,39 @@ public class MainViewModel extends AndroidViewModel implements LifecycleObserver
             .subscribeOn(Schedulers.io())
             .subscribe(this.player::postValue, this.throwable::postValue)
     );
+    Log.d((String) TAG, "PlayerInfo: " + pending.size());
+
   }
 
-  private String getAuthorizationHeader(GoogleSignInAccount account) {
-    String token = getApplication().getString(R.string.oauth_header, account.getIdToken());
-    Log.d("OAuth2.0 token", token); // FIXME Remove before shipping.
+  public void joinGame() {
+    String token = getAuthorizationHeader(account.getValue());
+    FarkleService.getInstance().post(token, new GamePreferences(2))
+        .subscribeOn(Schedulers.io())
+        .subscribe(this.game::postValue, this.throwable::postValue);
+  }
+
+  public String getAuthorizationHeader(GoogleSignInAccount account) {
+    String token = String.format(BuildConfig.AUTHORIZATION_FORMAT, account.getIdToken());
     return token;
   }
 
+  private void refreshAccount() {
+    GoogleSignInService.getInstance().refresh()
+        .addOnSuccessListener((account) -> {
+          Log.d("Authorization",
+              String.format(BuildConfig.AUTHORIZATION_FORMAT, account.getIdToken()));
+          this.account.postValue(account);
+        })
+        .addOnFailureListener(this.throwable::postValue);
+  }
 
   @OnLifecycleEvent(Event.ON_STOP)
   public void clearPending() {
     pending.clear();
+  }
+
+  public LiveData<Game> getGame() {
+    return game;
   }
 
   private class Poll extends TimerTask {

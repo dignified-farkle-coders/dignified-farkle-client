@@ -1,19 +1,26 @@
 package io.farkle.dignifiedfarkleclient.model.entity;
 
+import com.google.gson.annotations.Expose;
 import java.util.Date;
 
 public class GamePlayer {
 
+  @Expose
   private Long gamePlayerId;
 
+  @Expose
   private Date created;
 
+  @Expose
   private Game game;
 
+  @Expose
   private Player player;
 
+  @Expose
   private int order;
 
+  @Expose
   private int points;
 
   public Long getId() {
