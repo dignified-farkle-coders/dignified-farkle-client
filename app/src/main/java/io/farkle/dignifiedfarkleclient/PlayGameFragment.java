@@ -1,17 +1,32 @@
 package io.farkle.dignifiedfarkleclient;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.view.View;
+import android.net.Uri;
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
+import androidx.fragment.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import java.util.Arrays;
 import java.util.Random;
 
-public class PlayGameActivity extends AppCompatActivity {
 
+/**
+ * A simple {@link Fragment} subclass. Activities that contain this fragment must implement the
+ * {@link PlayGameFragment.OnFragmentInteractionListener} interface to handle interaction events.
+ * Use the {@link PlayGameFragment#newInstance} factory method to create an instance of this
+ * fragment.
+ */
+public class PlayGameFragment extends Fragment {
+
+  // TODO: Rename parameter arguments, choose names that match
+  // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+  private static final String ARG_PARAM1 = "param1";
+  private static final String ARG_PARAM2 = "param2";
   private static final String TAG = "playgameactivity";
   private Random rng = new Random();
   private boolean isSelected1;
@@ -22,33 +37,72 @@ public class PlayGameActivity extends AppCompatActivity {
   private boolean isSelected6;
   private int[] myArray = new int[6];
 
+  // TODO: Rename and change types of parameters
+  private String mParam1;
+  private String mParam2;
+
+  private OnFragmentInteractionListener mListener;
+
+  public PlayGameFragment() {
+    // Required empty public constructor
+  }
+
+  /**
+   * Use this factory method to create a new instance of this fragment using the provided
+   * parameters.
+   *
+   * @param param1 Parameter 1.
+   * @param param2 Parameter 2.
+   * @return A new instance of fragment PlayGameFragment.
+   */
+  // TODO: Rename and change types and number of parameters
+  public static PlayGameFragment newInstance(String param1, String param2) {
+    PlayGameFragment fragment = new PlayGameFragment();
+    Bundle args = new Bundle();
+    args.putString(ARG_PARAM1, param1);
+    args.putString(ARG_PARAM2, param2);
+    fragment.setArguments(args);
+    return fragment;
+  }
+
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    setContentView(R.layout.activity_play_game);
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    ImageView die1 = findViewById(R.id.die_1);
+  }
+
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    // Inflate the layout for this fragment
+    if (getArguments() != null) {
+      mParam1 = getArguments().getString(ARG_PARAM1);
+      mParam2 = getArguments().getString(ARG_PARAM2);
+    }
+
+    ImageView die1 = getView().findViewById(R.id.die_1);
     die1.setVisibility(View.GONE);
-    ImageView die2 = findViewById(R.id.die_2);
+    ImageView die2 = getView().findViewById(R.id.die_2);
     die2.setVisibility(View.GONE);
-    ImageView die3 = findViewById(R.id.die_3);
+    ImageView die3 = getView().findViewById(R.id.die_3);
     die3.setVisibility(View.GONE);
-    ImageView die4 = findViewById(R.id.die_4);
+    ImageView die4 = getView().findViewById(R.id.die_4);
     die4.setVisibility(View.GONE);
-    ImageView die5 = findViewById(R.id.die_5);
+    ImageView die5 = getView().findViewById(R.id.die_5);
     die5.setVisibility(View.GONE);
-    ImageView die6 = findViewById(R.id.die_6);
+    ImageView die6 = getView().findViewById(R.id.die_6);
     die6.setVisibility(View.GONE);
 
-    Button reRoll = findViewById(R.id.re_roll);
+    Button reRoll = getView().findViewById(R.id.re_roll);
     reRoll.setVisibility(View.GONE);
 
-    Button stay = findViewById(R.id.stay);
+    Button stay = getView().findViewById(R.id.stay);
     stay.setVisibility(View.GONE);
 
-    Button roll = findViewById(R.id.roll);
+    Button roll = getView().findViewById(R.id.roll);
     roll.setOnClickListener(v -> {
-      MediaPlayer diceRoll = MediaPlayer.create(this, R.raw.dice_roll);
+
+      MediaPlayer diceRoll = MediaPlayer.create(getActivity(), R.raw.dice_roll);
       diceRoll.start();
 
       isSelected1 = false;
@@ -160,25 +214,50 @@ public class PlayGameActivity extends AppCompatActivity {
     stay.setOnClickListener(v -> {
       clearScreen(die1, die2, die3, die4, die5, die6, stay, roll, reRoll, View.GONE, View.VISIBLE);
       int[] returnArray = dieArray();
-      for (int i = 0; i < dieArray().length ; i++) {
-          returnArray[i] = returnArray[i] * -1;
+      for (int i = 0; i < dieArray().length; i++) {
+        returnArray[i] = returnArray[i] * -1;
       }
       System.out.println(Arrays.toString(returnArray));
     });
+    return inflater.inflate(R.layout.fragment_play_game, container, false);
   }
 
-  private void clearScreen(ImageView die1, ImageView die2, ImageView die3, ImageView die4,
-      ImageView die5, ImageView die6, Button reRoll, Button stay, Button roll, int visible,
-      int gone) {
-    reRoll.setVisibility(View.GONE);
-    roll.setVisibility(visible);
-    stay.setVisibility(gone);
-    die1.setVisibility(View.GONE);
-    die2.setVisibility(View.GONE);
-    die3.setVisibility(View.GONE);
-    die4.setVisibility(View.GONE);
-    die5.setVisibility(View.GONE);
-    die6.setVisibility(View.GONE);
+  // TODO: Rename method, update argument and hook method into UI event
+  public void onButtonPressed(Uri uri) {
+    if (mListener != null) {
+      mListener.onFragmentInteraction(uri);
+    }
+  }
+
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    if (context instanceof OnFragmentInteractionListener) {
+      mListener = (OnFragmentInteractionListener) context;
+    } else {
+      throw new RuntimeException(context.toString()
+          + " must implement OnFragmentInteractionListener");
+    }
+  }
+
+  @Override
+  public void onDetach() {
+    super.onDetach();
+    mListener = null;
+  }
+
+  /**
+   * This interface must be implemented by activities that contain this fragment to allow an
+   * interaction in this fragment to be communicated to the activity and potentially other fragments
+   * contained in that activity.
+   * <p>
+   * See the Android Training lesson <a href= "http://developer.android.com/training/basics/fragments/communicating.html"
+   * >Communicating with Other Fragments</a> for more information.
+   */
+  public interface OnFragmentInteractionListener {
+
+    // TODO: Update argument type and name
+    void onFragmentInteraction(Uri uri);
   }
 
   private void dieImage(int value, ImageView die) {
@@ -200,6 +279,21 @@ public class PlayGameActivity extends AppCompatActivity {
     if (value == 6) {
       die.setImageResource(R.drawable.generic_6);
     }
+
+  }
+
+  private void clearScreen(ImageView die1, ImageView die2, ImageView die3, ImageView die4,
+      ImageView die5, ImageView die6, Button reRoll, Button stay, Button roll, int visible,
+      int gone) {
+    reRoll.setVisibility(View.GONE);
+    roll.setVisibility(visible);
+    stay.setVisibility(gone);
+    die1.setVisibility(View.GONE);
+    die2.setVisibility(View.GONE);
+    die3.setVisibility(View.GONE);
+    die4.setVisibility(View.GONE);
+    die5.setVisibility(View.GONE);
+    die6.setVisibility(View.GONE);
   }
 
   public int[] dieArray() {
@@ -241,5 +335,4 @@ public class PlayGameActivity extends AppCompatActivity {
     }
     return returnArray;
   }
-
 }

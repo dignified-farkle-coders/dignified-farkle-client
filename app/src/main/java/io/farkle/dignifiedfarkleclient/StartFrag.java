@@ -83,7 +83,7 @@ public class StartFrag extends Fragment implements View.OnClickListener {
   }
 
   private void openPlayGameActivity () {
-    Intent intent = new Intent(getContext(), PlayGameActivity.class);
+    Intent intent = new Intent(getContext(), PlayGameFragment.class);
     startActivity(intent);
   }
 

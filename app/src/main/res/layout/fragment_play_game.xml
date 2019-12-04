@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  android:id="@+id/farkle_time"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="20dp"
+  android:background="@drawable/main_background"
+  tools:context=".PlayGameFragment">
+
+  <TextView
+    android:id="@+id/play_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Play Game"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    style="@style/Headers"/>
+
+  <Button
+    android:id="@+id/roll"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Roll"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"/>
+
+  <Button
+    android:id="@+id/re_roll"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toLeftOf="@id/stay"
+    android:text="Re-Roll?"/>
+
+  <Button
+    android:id="@+id/stay"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toRightOf="@id/re_roll"
+    app:layout_constraintRight_toRightOf="parent"
+    android:text="End Turn?"/>
+
+  <ImageView
+    android:id="@+id/die_1"
+    android:src="@drawable/generic_1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toLeftOf="@id/die_2"
+    app:layout_constraintTop_toBottomOf="@id/guideline"
+    app:layout_constraintBottom_toTopOf="@id/guideline2"/>
+
+
+  <ImageView
+    android:id="@+id/die_2"
+    android:src="@drawable/generic_2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/guideline"
+    app:layout_constraintBottom_toTopOf="@id/guideline2"
+    app:layout_constraintLeft_toRightOf="@id/die_1"
+    app:layout_constraintRight_toLeftOf="@id/die_3"/>
+
+
+  <ImageView
+    android:id="@+id/die_3"
+    android:src="@drawable/generic_3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/guideline"
+    app:layout_constraintBottom_toTopOf="@id/guideline2"
+    app:layout_constraintLeft_toRightOf="@id/die_2"
+    app:layout_constraintRight_toLeftOf="@id/die_4"/>
+
+
+  <ImageView
+    android:id="@+id/die_4"
+    android:src="@drawable/generic_4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/guideline"
+    app:layout_constraintBottom_toTopOf="@id/guideline2"
+    app:layout_constraintLeft_toRightOf="@id/die_3"
+    app:layout_constraintRight_toLeftOf="@id/die_5"/>
+
+  <ImageView
+    android:id="@+id/die_5"
+    android:src="@drawable/generic_5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/guideline"
+    app:layout_constraintBottom_toTopOf="@id/guideline2"
+    app:layout_constraintLeft_toRightOf="@id/die_4"
+    app:layout_constraintRight_toLeftOf="@id/die_6"/>
+
+  <ImageView
+    android:id="@+id/die_6"
+    android:src="@drawable/generic_6"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/guideline"
+    app:layout_constraintBottom_toTopOf="@id/guideline2"
+    app:layout_constraintLeft_toRightOf="@id/die_5"
+    app:layout_constraintRight_toRightOf="parent"/>
+
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/guideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.1"/>
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/guideline2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.85"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
