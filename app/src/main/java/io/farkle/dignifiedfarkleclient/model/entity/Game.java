@@ -23,6 +23,9 @@ public class Game {
   private List<Action> actions = new LinkedList<>();
 
   @Expose
+  private Action lastAction;
+
+  @Expose
   private Player winner;
 
   @Expose
@@ -68,6 +71,14 @@ public class Game {
 
   public Player getWinner() {
     return winner;
+  }
+
+  public Action getLastAction() {
+    return lastAction;
+  }
+
+  public void setLastAction(Action lastAction) {
+    this.lastAction = lastAction;
   }
 
   public void setWinner(Player winner) {

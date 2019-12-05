@@ -20,6 +20,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Declaration of proxy methods used to connect to Diceware server application, with
@@ -31,15 +32,14 @@ public interface FarkleService {
     return InstanceHolder.INSTANCE;
   }
 
-  @GET("actions/")
-  Observable<List<Action>> getAllActions(@Header("Authorization") String token);
-
   @GET("player/")
   Observable<List<Player>> getPlayerInfo(@Header("Authorization") String token);
 
   @POST("games/join")
   Single<Game> post(@Header("Authorization") String token, @Body GamePreferences preferences);
 
+  @POST("games/{id}/actions")
+  Single<Game> post(@Header("Authorization") String token, @Body Action action, @Path("id") long id);
 //  @POST("points/")
 //  Single<Points> post(@Header("Authorization") String token, @Body Points points);
 //

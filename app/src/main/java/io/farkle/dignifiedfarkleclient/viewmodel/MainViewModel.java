@@ -69,6 +69,8 @@ public class MainViewModel<TAG> extends AndroidViewModel implements LifecycleObs
     }
   }
 
+
+
   private void refreshPlayer(GoogleSignInAccount account) {
     String token = getAuthorizationHeader(account);
     pending.add(
@@ -80,6 +82,13 @@ public class MainViewModel<TAG> extends AndroidViewModel implements LifecycleObs
   }
 
   public void joinGame() {
+    String token = getAuthorizationHeader(account.getValue());
+    FarkleService.getInstance().post(token, new GamePreferences(1))
+        .subscribeOn(Schedulers.io())
+        .subscribe(this.game::postValue);//, this.throwable::postValue);
+  }
+
+  public void sendFrozen() {
     String token = getAuthorizationHeader(account.getValue());
     FarkleService.getInstance().post(token, new GamePreferences(1))
         .subscribeOn(Schedulers.io())

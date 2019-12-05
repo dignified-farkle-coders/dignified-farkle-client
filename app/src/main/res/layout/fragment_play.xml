@@ -12,7 +12,7 @@
   tools:context=".PlayFragment">
 
   <TextView
-    android:id="@+id/play_title"
+    android:id="@+id/display_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Play Game"
