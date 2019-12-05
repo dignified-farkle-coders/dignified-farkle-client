@@ -1,31 +1,24 @@
 package io.farkle.dignifiedfarkleclient.controller;
 
 import android.content.Intent;
-import android.widget.Button;
-
-import android.widget.ProgressBar;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import com.jaredrummler.materialspinner.MaterialSpinner;
-
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import io.farkle.dignifiedfarkleclient.MarketFrag;
 import io.farkle.dignifiedfarkleclient.R;
-import io.farkle.dignifiedfarkleclient.StartFrag;
-import io.farkle.dignifiedfarkleclient.TournamentFrag;
-import io.farkle.dignifiedfarkleclient.service.FarkleService;
+import io.farkle.dignifiedfarkleclient.model.entity.Game;
 import io.farkle.dignifiedfarkleclient.service.GoogleSignInService;
 import io.farkle.dignifiedfarkleclient.viewmodel.MainViewModel;
 
@@ -34,19 +27,47 @@ public class MainActivity extends AppCompatActivity {
   private ProgressBar waiting;
   private MainViewModel viewModel;
   private GoogleSignInService signInService;
-
+  private NavController navController;
+  private NavHostFragment navHostFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    SectionsPagerAdapter mSectionsPagerAdapter =
-        new SectionsPagerAdapter(getSupportFragmentManager());
+    navHostFragment = (NavHostFragment) getSupportFragmentManager()
+        .findFragmentById(R.id.nav_host_fragment);
+    navController = navHostFragment.getNavController();
 
     setupSignIn();
-    ViewPager mViewPager = findViewById(R.id.container);
-    mViewPager.setAdapter(mSectionsPagerAdapter);
-    mViewPager.setCurrentItem(1);
+    viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+    viewModel.getGame().observe(this, obj -> {
+      Game game = (Game) obj;
+      if (game != null) {
+        switch (game.getState()) {
+          case PENDING:
+            navController.navigate(R.id.waitingFragment);
+            break;
+          case IN_PROGRESS:
+            if (game.isYourTurn()) {
+              navController.navigate(R.id.playFragment);
+            } else {
+              navController.navigate(R.id.opponentTurnFragment);
+            }
+            break;
+          case COMPLETED:
+            navController.navigate(R.id.startFragment);
+            break;
+          case ABANDONED:
+            navController.navigate(R.id.startFragment);
+            break;
+        }
+      } else {
+        navController.navigate(R.id.startFragment);
+      }
+    });
+//    ViewPager mViewPager = findViewById(R.id.container);
+//    mViewPager.setAdapter(mSectionsPagerAdapter);
+//    mViewPager.setCurrentItem(1);
   }
 
   @Override
@@ -145,34 +166,5 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-    public SectionsPagerAdapter(FragmentManager fm) {
-      super(fm);
-    }
-
-    @Override
-    public Fragment getItem(int position) {
-      Fragment fragment = null;
-      switch (position) {
-        case 0:
-          fragment = new TournamentFrag();
-          break;
-        case 1:
-          fragment = new StartFrag();
-          break;
-        case 2:
-          fragment = new MarketFrag();
-          break;
-      }
-      return fragment;
-    }
-
-    @Override
-    public int getCount() {
-      // Show 3 total pages.
-      return 3;
-    }
-  }
 
 }

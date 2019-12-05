@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:padding="20dp"
-  tools:context=".controller.MainActivity$PlaceholderFragment">
+  tools:context=".StartFragment">
 
   <TextView
     android:id="@+id/num_players"
@@ -55,7 +55,7 @@
     android:textStyle="italic"
     />
 
-  <com.jaredrummler.materialspinner.MaterialSpinner
+  <Spinner
     android:id="@+id/spinner"
     android:layout_width="300dp"
     android:layout_height="wrap_content"

@@ -4,29 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.snackbar.Snackbar;
-import com.jaredrummler.materialspinner.MaterialSpinner;
 import io.farkle.dignifiedfarkleclient.service.FarkleService;
 import io.farkle.dignifiedfarkleclient.service.GoogleSignInService;
 import io.farkle.dignifiedfarkleclient.viewmodel.MainViewModel;
 
-public class StartFrag extends Fragment implements View.OnClickListener {
+public class StartFragment extends Fragment implements View.OnClickListener {
 
   private Button button;
   private View view;
   private Button playButton;
   private FarkleService farkleService;
   private MainViewModel viewModel;
-  private MaterialSpinner spinner;
+  private Spinner spinner;
   private GoogleSignInService googleSignInService = GoogleSignInService.getInstance();
 
 
@@ -40,14 +38,14 @@ public class StartFrag extends Fragment implements View.OnClickListener {
     playButton = view.findViewById(R.id.find_game);
     playButton.setOnClickListener(this);
     spinner = view.findViewById(R.id.spinner);
-    spinner.setItems("Lonely Larry", "One Short of a Mexican Stand Off", "Mexican Stand Off", " Larrys United");
-
-    spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
-      @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-        Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
-      }
-    });
+//    spinner.setItems("Lonely Larry", "One Short of a Mexican Stand Off", "Mexican Stand Off", " Larrys United");
+//
+//    spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+//
+//      @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//        Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+//      }
+//    });
 
 //    mainViewModel.getAuthorizationHeader(googleSignInService.getAccount());
     return view;
@@ -66,7 +64,7 @@ public class StartFrag extends Fragment implements View.OnClickListener {
   public void onClick(View view) {
     switch (view.getId()) {
       case R.id.find_game:
-//        openPlayGameActivity();
+        openPlayGameActivity();
         viewModel.joinGame();
         break;
       case R.id.profile_button:
@@ -76,15 +74,17 @@ public class StartFrag extends Fragment implements View.OnClickListener {
     }
   }
 
-
   private void openProfileActivity () {
     Intent intent = new Intent(getContext(), ProfileActivity.class);
     startActivity(intent);
   }
 
   private void openPlayGameActivity () {
-    Intent intent = new Intent(getContext(), PlayGameFragment.class);
-    startActivity(intent);
+//    PlayFragment nextFrag= new PlayFragment();
+//    getFragmentManager().beginTransaction()
+//        .replace(R.id., nextFrag, "findThisFragment")
+//        .addToBackStack(null)
+//        .commit();
   }
 
 }

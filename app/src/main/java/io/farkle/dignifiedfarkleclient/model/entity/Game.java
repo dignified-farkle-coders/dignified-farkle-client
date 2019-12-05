@@ -31,6 +31,17 @@ public class Game {
   @Expose
   private int numberOfRounds;
 
+  @Expose
+  private boolean yourTurn;
+
+  public boolean isYourTurn() {
+    return yourTurn;
+  }
+
+  public void setYourTurn(boolean yourTurn) {
+    this.yourTurn = yourTurn;
+  }
+
   public long getId() {
     return id;
   }

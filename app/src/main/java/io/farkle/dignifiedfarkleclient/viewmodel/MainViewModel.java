@@ -11,13 +11,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.OnLifecycleEvent;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import io.farkle.dignifiedfarkleclient.BuildConfig;
-import io.farkle.dignifiedfarkleclient.R;
 import io.farkle.dignifiedfarkleclient.model.GamePreferences;
 import io.farkle.dignifiedfarkleclient.model.entity.Game;
 import io.farkle.dignifiedfarkleclient.model.entity.Player;
 import io.farkle.dignifiedfarkleclient.service.FarkleService;
 import io.farkle.dignifiedfarkleclient.service.GoogleSignInService;
-import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Collections;
@@ -40,7 +38,7 @@ public class MainViewModel<TAG> extends AndroidViewModel implements LifecycleObs
     super(application);
     farkleService = FarkleService.getInstance();
     player = new MutableLiveData<>();
-    game = new MutableLiveData<>();
+    game = new MutableLiveData<>(null);
     account = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
@@ -49,7 +47,7 @@ public class MainViewModel<TAG> extends AndroidViewModel implements LifecycleObs
     refreshAccount();
   }
 
-  public MutableLiveData<List<Player>> getPlayer() {
+  public LiveData<List<Player>> getPlayer() {
     return player;
   }
 
@@ -79,14 +77,13 @@ public class MainViewModel<TAG> extends AndroidViewModel implements LifecycleObs
             .subscribe(this.player::postValue, this.throwable::postValue)
     );
     Log.d((String) TAG, "PlayerInfo: " + pending.size());
-
   }
 
   public void joinGame() {
     String token = getAuthorizationHeader(account.getValue());
-    FarkleService.getInstance().post(token, new GamePreferences(2))
+    FarkleService.getInstance().post(token, new GamePreferences(1))
         .subscribeOn(Schedulers.io())
-        .subscribe(this.game::postValue, this.throwable::postValue);
+        .subscribe(this.game::postValue);//, this.throwable::postValue);
   }
 
   public String getAuthorizationHeader(GoogleSignInAccount account) {

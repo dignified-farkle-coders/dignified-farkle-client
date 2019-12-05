@@ -9,7 +9,7 @@
   android:layout_height="match_parent"
   android:padding="20dp"
   android:background="@drawable/main_background"
-  tools:context=".PlayGameFragment">
+  tools:context=".PlayFragment">
 
   <TextView
     android:id="@+id/play_title"

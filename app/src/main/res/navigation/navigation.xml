@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/navigation"
+  app:startDestination="@id/startFragment">
+
+  <fragment
+    android:id="@+id/startFragment"
+    android:name="io.farkle.dignifiedfarkleclient.StartFragment"
+    android:label="fragment_start"
+    tools:layout="@layout/fragment_start"/>
+  <fragment
+    android:id="@+id/opponentTurnFragment"
+    android:name="io.farkle.dignifiedfarkleclient.OpponentTurnFragment"
+    android:label="fragment_opponent_turn"
+    tools:layout="@layout/fragment_opponent_turn"/>
+  <fragment
+    android:id="@+id/playFragment"
+    android:name="io.farkle.dignifiedfarkleclient.PlayFragment"
+    android:label="fragment_play_game"
+    tools:layout="@layout/fragment_play"/>
+  <fragment
+    android:id="@+id/waitingFragment"
+    android:name="io.farkle.dignifiedfarkleclient.WaitingFragment"
+    android:label="fragment_waiting"
+    tools:layout="@layout/fragment_waiting"/>
+</navigation>
