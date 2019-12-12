@@ -12,6 +12,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import io.farkle.dignifiedfarkleclient.BuildConfig;
 import io.farkle.dignifiedfarkleclient.model.GamePreferences;
+import io.farkle.dignifiedfarkleclient.model.entity.Action;
 import io.farkle.dignifiedfarkleclient.model.entity.Game;
 import io.farkle.dignifiedfarkleclient.model.entity.Player;
 import io.farkle.dignifiedfarkleclient.service.FarkleService;
@@ -85,12 +86,15 @@ public class MainViewModel<TAG> extends AndroidViewModel implements LifecycleObs
     String token = getAuthorizationHeader(account.getValue());
     FarkleService.getInstance().post(token, new GamePreferences(1))
         .subscribeOn(Schedulers.io())
-        .subscribe(this.game::postValue);//, this.throwable::postValue);
+        .subscribe(this.game::postValue, this.throwable::postValue);
   }
 
-  public void sendFrozen() {
+  public void sendFrozen(int[] frozen, boolean stay) {
     String token = getAuthorizationHeader(account.getValue());
-    FarkleService.getInstance().post(token, new GamePreferences(1))
+    Action action = new Action();
+    action.setFrozenDice(frozen);
+    action.setStay(stay);
+    FarkleService.getInstance().post(token, action, game.getValue().getId())
         .subscribeOn(Schedulers.io())
         .subscribe(this.game::postValue);//, this.throwable::postValue);
   }

@@ -21,14 +21,14 @@
     app:layout_constraintLeft_toLeftOf="parent"
     style="@style/Headers"/>
 
-  <Button
-    android:id="@+id/roll"
+  <TextView
+    android:id="@+id/point_tally"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Roll"
-    app:layout_constraintBottom_toBottomOf="parent"
+    android:text="0"
+    app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"/>
+    style="@style/Headers"/>
 
   <Button
     android:id="@+id/re_roll"
@@ -37,7 +37,7 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toLeftOf="@id/stay"
-    android:text="Re-Roll?"/>
+    android:text="Roll"/>
 
   <Button
     android:id="@+id/stay"
@@ -46,7 +46,7 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toRightOf="@id/re_roll"
     app:layout_constraintRight_toRightOf="parent"
-    android:text="End Turn?"/>
+    android:text="Stay"/>
 
   <ImageView
     android:id="@+id/die_1"

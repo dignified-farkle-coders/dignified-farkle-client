@@ -9,7 +9,7 @@
   </style>
 
   <style name="DataFields" parent="Theme.AppCompat.Light">
-    <item name="android:textSize">16sp</item>
+    <item name="android:textSize">30sp</item>
     <item name="android:padding">30sp</item>
     <item name="android:textColor">@color/textColors</item>
   </style>
