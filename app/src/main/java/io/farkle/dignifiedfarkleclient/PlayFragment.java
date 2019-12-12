@@ -40,12 +40,12 @@ public class PlayFragment extends Fragment {
   private int[] myArray = new int[6];
   private TextView userDisplay;
   private MainViewModel viewModel;
-  ImageView die1;
-  ImageView die2;
-  ImageView die3;
-  ImageView die4;
-  ImageView die5;
-  ImageView die6;
+  private ImageView die1;
+  private ImageView die2;
+  private ImageView die3;
+  private ImageView die4;
+  private ImageView die5;
+  private ImageView die6;
 //  MediaPlayer diceAudio;
   private TextView pointTally;
   private GamePlayer gamePlayer;
@@ -116,91 +116,103 @@ public class PlayFragment extends Fragment {
       if (myArray.length > 0) {
         dieImage(myArray[0], die1);
         die1.setVisibility(View.VISIBLE);
-        die1.setOnClickListener(one -> {
-          if (!isSelected1) {
-            die1.setColorFilter(Color.argb(175, 57, 102, 255));
-            isSelected1 = true;
-          } else {
-            die1.setColorFilter(null);
-            isSelected1 = false;
-          }
-          System.out.println(Arrays.toString(dieArray(myArray.length)));
-        });
+        if(!game.getLastAction().getFarkleOut()) {
+          die1.setOnClickListener(one -> {
+            if (!isSelected1) {
+              die1.setColorFilter(Color.argb(175, 57, 102, 255));
+              isSelected1 = true;
+            } else {
+              die1.setColorFilter(null);
+              isSelected1 = false;
+            }
+            System.out.println(Arrays.toString(dieArray(myArray.length)));
+          });
+        }
       }
 
       if (myArray.length > 1) {
         dieImage(myArray[1], die2);
         die2.setVisibility(View.VISIBLE);
-        die2.setOnClickListener(one -> {
-          if (!isSelected2) {
-            die2.setColorFilter(Color.argb(175, 57, 102, 255));
-            isSelected2 = true;
-          } else {
-            die2.setColorFilter(null);
-            isSelected2 = false;
-          }
-          System.out.println(Arrays.toString(dieArray(myArray.length)));
-        });
+        if(!game.getLastAction().getFarkleOut()) {
+          die2.setOnClickListener(one -> {
+            if (!isSelected2) {
+              die2.setColorFilter(Color.argb(175, 57, 102, 255));
+              isSelected2 = true;
+            } else {
+              die2.setColorFilter(null);
+              isSelected2 = false;
+            }
+            System.out.println(Arrays.toString(dieArray(myArray.length)));
+          });
+        }
       }
 
       if (myArray.length > 2) {
         dieImage(myArray[2], die3);
         die3.setVisibility(View.VISIBLE);
-        die3.setOnClickListener(one -> {
-          if (!isSelected3) {
-            die3.setColorFilter(Color.argb(175, 57, 102, 255));
-            isSelected3 = true;
-          } else {
-            die3.setColorFilter(null);
-            isSelected3 = false;
-          }
-          System.out.println(Arrays.toString(dieArray(myArray.length)));
-        });
+        if(!game.getLastAction().getFarkleOut()) {
+          die3.setOnClickListener(one -> {
+            if (!isSelected3) {
+              die3.setColorFilter(Color.argb(175, 57, 102, 255));
+              isSelected3 = true;
+            } else {
+              die3.setColorFilter(null);
+              isSelected3 = false;
+            }
+            System.out.println(Arrays.toString(dieArray(myArray.length)));
+          });
+        }
       }
 
       if (myArray.length > 3) {
         dieImage(myArray[3], die4);
         die4.setVisibility(View.VISIBLE);
-        die4.setOnClickListener(one -> {
-          if (!isSelected4) {
-            die4.setColorFilter(Color.argb(175, 57, 102, 255));
-            isSelected4 = true;
-          } else {
-            die4.setColorFilter(null);
-            isSelected4 = false;
-          }
-          System.out.println(Arrays.toString(dieArray(myArray.length)));
-        });
+        if(!game.getLastAction().getFarkleOut()) {
+          die4.setOnClickListener(one -> {
+            if (!isSelected4) {
+              die4.setColorFilter(Color.argb(175, 57, 102, 255));
+              isSelected4 = true;
+            } else {
+              die4.setColorFilter(null);
+              isSelected4 = false;
+            }
+            System.out.println(Arrays.toString(dieArray(myArray.length)));
+          });
+        }
       }
 
       if (myArray.length > 4) {
         dieImage(myArray[4], die5);
         die5.setVisibility(View.VISIBLE);
-        die5.setOnClickListener(one -> {
-          if (!isSelected5) {
-            die5.setColorFilter(Color.argb(175, 57, 102, 255));
-            isSelected5 = true;
-          } else {
-            die5.setColorFilter(null);
-            isSelected5 = false;
-          }
-          System.out.println(Arrays.toString(dieArray(myArray.length)));
-        });
+        if(!game.getLastAction().getFarkleOut()) {
+          die5.setOnClickListener(one -> {
+            if (!isSelected5) {
+              die5.setColorFilter(Color.argb(175, 57, 102, 255));
+              isSelected5 = true;
+            } else {
+              die5.setColorFilter(null);
+              isSelected5 = false;
+            }
+            System.out.println(Arrays.toString(dieArray(myArray.length)));
+          });
+        }
       }
 
       if (myArray.length > 5) {
         dieImage(myArray[5], die6);
         die6.setVisibility(View.VISIBLE);
-        die6.setOnClickListener(one -> {
-          if (!isSelected6) {
-            die6.setColorFilter(Color.argb(175, 57, 102, 255));
-            isSelected6 = true;
-          } else {
-            die6.setColorFilter(null);
-            isSelected6 = false;
-          }
-          System.out.println(Arrays.toString(dieArray(myArray.length)));
-        });
+        if(!game.getLastAction().getFarkleOut()) {
+          die6.setOnClickListener(one -> {
+            if (!isSelected6) {
+              die6.setColorFilter(Color.argb(175, 57, 102, 255));
+              isSelected6 = true;
+            } else {
+              die6.setColorFilter(null);
+              isSelected6 = false;
+            }
+            System.out.println(Arrays.toString(dieArray(myArray.length)));
+          });
+        }
       }
 
       userDisplay = view.findViewById(R.id.display_name);

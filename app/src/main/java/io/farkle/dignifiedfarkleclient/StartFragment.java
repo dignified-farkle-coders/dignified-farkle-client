@@ -2,17 +2,20 @@ package io.farkle.dignifiedfarkleclient;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
-import com.google.android.material.snackbar.Snackbar;
+import io.farkle.dignifiedfarkleclient.model.entity.Player;
 import io.farkle.dignifiedfarkleclient.service.FarkleService;
 import io.farkle.dignifiedfarkleclient.service.GoogleSignInService;
 import io.farkle.dignifiedfarkleclient.viewmodel.MainViewModel;
@@ -25,29 +28,35 @@ public class StartFragment extends Fragment implements View.OnClickListener {
   private FarkleService farkleService;
   private MainViewModel viewModel;
   private Spinner spinner;
+  private TextView claim;
+  private TextView reward;
+  private TextView bonus;
+  private TextView victoryPoints;
+  private ImageView goldenDice;
+  private Button marketButton;
   private GoogleSignInService googleSignInService = GoogleSignInService.getInstance();
+  public static int playerPoints = 0;
 
 
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    view = inflater.inflate(R.layout.fragment_start, container, false);
+    View view = inflater.inflate(R.layout.fragment_start, container, false);
     button = view.findViewById(R.id.profile_button);
     button.setOnClickListener(this);
     playButton = view.findViewById(R.id.find_game);
     playButton.setOnClickListener(this);
+    marketButton = view.findViewById(R.id.market);
+    marketButton.setOnClickListener(this);
     spinner = view.findViewById(R.id.spinner);
-//    spinner.setItems("Lonely Larry", "One Short of a Mexican Stand Off", "Mexican Stand Off", " Larrys United");
-//
-//    spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-//
-//      @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//        Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
-//      }
-//    });
+    claim = view.findViewById(R.id.claim);
+    reward = view.findViewById(R.id.reward);
+    goldenDice = view.findViewById(R.id.market_dice);
+    bonus = view.findViewById(R.id.bonus);
+    bonus.setVisibility(View.GONE);
+    victoryPoints = view.findViewById(R.id.victory_points);
 
-//    mainViewModel.getAuthorizationHeader(googleSignInService.getAccount());
     return view;
   }
 
@@ -55,17 +64,39 @@ public class StartFragment extends Fragment implements View.OnClickListener {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
-    viewModel.getGame().observe(this, (game) -> {
-      Log.d(getClass().getSimpleName(), "Game Created");
+    Player player = new Player();
+
+    goldenDice.setOnClickListener(v -> {
+      claim.setVisibility(View.INVISIBLE);
+      reward.setVisibility(View.INVISIBLE);
+      goldenDice.setVisibility(View.INVISIBLE);
+      bonus.setVisibility(View.VISIBLE);
+
+      AlphaAnimation fadeIn = new AlphaAnimation(0.0f, 1.0f);
+      AlphaAnimation fadeOut = new AlphaAnimation(1.0f, 0.0f);
+      bonus.startAnimation(fadeOut);
+      fadeOut.setDuration(1200);
+      fadeOut.setFillAfter(true);
+      fadeOut.setStartOffset(800 + fadeIn.getStartOffset());
+      player.setVictoryPoints(1000);
+      playerPoints = player.getVictoryPoints();
+
+
+      victoryPoints.setText(String.valueOf(playerPoints));
+
+
     });
   }
+
 
   @Override
   public void onClick(View view) {
     switch (view.getId()) {
       case R.id.find_game:
-        openPlayGameActivity();
         viewModel.joinGame();
+        break;
+      case R.id.market:
+        openMarketActivity();
         break;
       case R.id.profile_button:
         openProfileActivity();
@@ -74,17 +105,15 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     }
   }
 
-  private void openProfileActivity () {
+  private void openProfileActivity() {
     Intent intent = new Intent(getContext(), ProfileActivity.class);
     startActivity(intent);
   }
 
-  private void openPlayGameActivity () {
-//    PlayFragment nextFrag= new PlayFragment();
-//    getFragmentManager().beginTransaction()
-//        .replace(R.id., nextFrag, "findThisFragment")
-//        .addToBackStack(null)
-//        .commit();
+  private void openMarketActivity() {
+    Intent intent = new Intent(getContext(), MarketActivity.class);
+    startActivity(intent);
   }
+
 
 }
