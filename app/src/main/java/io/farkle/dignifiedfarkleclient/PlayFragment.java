@@ -16,10 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProviders;
+import io.farkle.dignifiedfarkleclient.model.entity.Action;
 import io.farkle.dignifiedfarkleclient.model.entity.Game;
 import io.farkle.dignifiedfarkleclient.model.entity.GamePlayer;
 import io.farkle.dignifiedfarkleclient.viewmodel.MainViewModel;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import org.w3c.dom.Text;
 
@@ -44,7 +46,7 @@ public class PlayFragment extends Fragment {
   ImageView die4;
   ImageView die5;
   ImageView die6;
-  MediaPlayer diceAudio;
+//  MediaPlayer diceAudio;
   private TextView pointTally;
   private GamePlayer gamePlayer;
 
@@ -87,16 +89,28 @@ public class PlayFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
-    diceAudio = MediaPlayer.create(getContext(), R.raw.dice_roll);
+//    diceAudio = MediaPlayer.create(getContext(), R.raw.dice_roll);
     Button reRoll = view.findViewById(R.id.re_roll);
     Button stay = view.findViewById(R.id.stay);
+    Button next = view.findViewById(R.id.next);
     pointTally = view.findViewById(R.id.point_tally);
+    next.setVisibility(View.GONE);
 
     viewModel.getGame().observe(this, obj -> {
       Game game = (Game) obj;
-
-//      GamePlayer gamePlayer = game.getGamePlayers().get();
+      List<GamePlayer> gamePlayers = game.getGamePlayers();
+      for (GamePlayer gamePlayer : gamePlayers) {
+        int userPoints = gamePlayer.getPoints();
+        System.out.println("DONE: " + userPoints);
+        pointTally.setText(String.valueOf(userPoints));
+      }
       myArray = game.getLastAction().getAvailableDice();
+      if(game.getLastAction().getFarkleOut()) {
+        pointTally.setText("Farkle!!!");
+        reRoll.setVisibility(View.GONE);
+        stay.setVisibility(View.GONE);
+        next.setVisibility(View.VISIBLE);
+      }
       System.out.println("MyArray: " + Arrays.toString(myArray));
 
       if (myArray.length > 0) {
@@ -199,20 +213,29 @@ public class PlayFragment extends Fragment {
       }
 
       reRoll.setOnClickListener(v -> {
+        System.out.println("myArray " + Arrays.toString(myArray));
         System.out.println("dieArray " + Arrays.toString(dieArray(myArray.length)));
         viewModel.sendFrozen(dieArray(myArray.length), false);
         myArray = game.getLastAction().getAvailableDice();
-//        pointTally.setText(game.getLastAction().getPlayer().getVictoryPoints());
-        diceAudio.start();
-
+//        diceAudio.start();
       });
 
       stay.setOnClickListener(v -> {
         int[] returnArray = dieArray(myArray.length);
+        for (int i = 0; i < returnArray.length; i++) {
+          returnArray[i] = returnArray[i] * -1;
+        }
+        viewModel.sendFrozen(returnArray, true);
+        myArray = game.getLastAction().getAvailableDice();
+//        diceAudio.start();
+      });
 
+      next.setOnClickListener(v -> {
+        int[] returnArray = dieArray(myArray.length);
         System.out.println("Stay Dice: " + Arrays.toString(returnArray));
-        viewModel.sendFrozen(dieArray(myArray.length), true);
-        diceAudio.start();
+        viewModel.sendFrozen(new int[]{-700}, true);
+        myArray = game.getLastAction().getAvailableDice();
+//        diceAudio.start();
       });
     });
   }

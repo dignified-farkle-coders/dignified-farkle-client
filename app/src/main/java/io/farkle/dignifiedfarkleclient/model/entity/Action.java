@@ -29,6 +29,9 @@ public class Action {
   private boolean stay;
 
   @Expose
+  private boolean farkleOut;
+
+  @Expose
   private int turn;
   public long getActionId() {
     return actionId;
@@ -84,6 +87,14 @@ public class Action {
 
   public void setStay(boolean stay) {
     this.stay = stay;
+  }
+
+  public boolean getFarkleOut() {
+    return farkleOut;
+  }
+
+  public void setFarkleOut(boolean farkleOut) {
+    this.farkleOut = farkleOut;
   }
 
   public int getTurn() {
