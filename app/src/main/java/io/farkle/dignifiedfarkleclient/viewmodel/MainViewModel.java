@@ -57,7 +57,7 @@ public class MainViewModel<TAG> extends AndroidViewModel implements LifecycleObs
   }
 
   public void startRound() {
-      refreshPlayer();
+    refreshPlayer();
   }
 
 
