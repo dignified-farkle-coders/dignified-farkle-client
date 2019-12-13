@@ -53,7 +53,7 @@ public class MarketActivity extends AppCompatActivity {
     diePresentation3.setColorFilter(Color.argb(100, 0, 0, 255));
     diePresentation4 = findViewById(R.id.die_presentation_4);
 
-    victoryPoints.setText(String.valueOf(StartFragment.playerPoints));
+    victoryPoints.setText(String.valueOf(StartFragment.player.getVictoryPoints()));
 
     diePresentation1.setOnClickListener(new OnClickListener() {
       @Override
@@ -98,10 +98,11 @@ public class MarketActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         System.out.println("POINTS: " + StartFragment.playerPoints);
-        if(StartFragment.playerPoints >= basket) {
-          System.out.println(StartFragment.playerPoints - basket);
-          StartFragment.player.setVictoryPoints(StartFragment.playerPoints - basket);
+        if(StartFragment.player.getVictoryPoints() >= basket) {
+          System.out.println(StartFragment.player.getVictoryPoints() - basket);
+          StartFragment.player.setVictoryPoints(StartFragment.player.getVictoryPoints() - basket);
           victoryPoints.setText(String.valueOf(StartFragment.player.getVictoryPoints()));
+          StartFragment.victoryPoints.setText(String.valueOf(StartFragment.player.getVictoryPoints()));
           editor.commit(); // commit changes
         } else {
           Toast.makeText(getApplicationContext(),"Not Enough Funds",Toast.LENGTH_SHORT).show();          }

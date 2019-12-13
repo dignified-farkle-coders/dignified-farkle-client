@@ -31,7 +31,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
   private TextView claim;
   private TextView reward;
   private TextView bonus;
-  private TextView victoryPoints;
+  public static TextView victoryPoints;
   private ImageView goldenDice;
   private Button marketButton;
   private GoogleSignInService googleSignInService = GoogleSignInService.getInstance();
@@ -59,6 +59,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     bonus.setVisibility(View.GONE);
     victoryPoints = view.findViewById(R.id.victory_points);
 
+
     return view;
   }
 
@@ -67,10 +68,15 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     super.onViewCreated(view, savedInstanceState);
     viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
+    try {
+      victoryPoints.setText(player.getVictoryPoints());
+    } catch (Exception e){
+      victoryPoints.setText(String.valueOf(0));
+    }
+
     goldenDice.setOnClickListener(v -> {
       claim.setVisibility(View.INVISIBLE);
       reward.setVisibility(View.INVISIBLE);
-      goldenDice.setVisibility(View.INVISIBLE);
       bonus.setVisibility(View.VISIBLE);
 
       AlphaAnimation fadeIn = new AlphaAnimation(0.0f, 1.0f);
@@ -79,7 +85,12 @@ public class StartFragment extends Fragment implements View.OnClickListener {
       fadeOut.setDuration(1200);
       fadeOut.setFillAfter(true);
       fadeOut.setStartOffset(800 + fadeIn.getStartOffset());
-      player.setVictoryPoints(1000);
+      System.out.println("Victory Points: " + player.getVictoryPoints());
+      if (goldenDice.getVisibility() == View.VISIBLE) {
+        player.setVictoryPoints(1000);
+      }
+      goldenDice.setVisibility(View.INVISIBLE);
+
       playerPoints = player.getVictoryPoints();
 
       victoryPoints.setText(String.valueOf(playerPoints));
