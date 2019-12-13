@@ -1,19 +1,23 @@
 package io.farkle.dignifiedfarkleclient;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProviders;
 import io.farkle.dignifiedfarkleclient.model.entity.Game;
+import io.farkle.dignifiedfarkleclient.model.entity.Game.State;
 import io.farkle.dignifiedfarkleclient.model.entity.GamePlayer;
 import io.farkle.dignifiedfarkleclient.viewmodel.MainViewModel;
 import java.util.Arrays;
@@ -42,17 +46,19 @@ public class PlayFragment extends Fragment {
   private ImageView die4;
   private ImageView die5;
   private ImageView die6;
+  private Button leaveGame;
   private int userPoints = 0;
   //  MediaPlayer diceAudio;
   private TextView pointTally;
   private GamePlayer gamePlayer;
-
+  private Random rnd;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_play, container, false);
-
+    leaveGame = view.findViewById(R.id.leave_game_button);
+    leaveGame.setVisibility(View.INVISIBLE);
     displayLostPoints = view.findViewById(R.id.display_lost_points);
     displayLostPoints.setVisibility(View.INVISIBLE);
     die1 = view.findViewById(R.id.die_1);
@@ -81,6 +87,16 @@ public class PlayFragment extends Fragment {
     isSelected6 = false;
     die6.setColorFilter(null);
 
+//    leaveGame.setOnClickListener(new OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//        StartFragment nextFrag= new StartFragment();
+//        getActivity().getSupportFragmentManager().beginTransaction()
+//            .replace(R.id.container, nextFrag, "findThisFragment")
+//            .addToBackStack(null)
+//            .commit();
+//      }
+//    });
     return view;
   }
 
@@ -114,6 +130,7 @@ public class PlayFragment extends Fragment {
         next.setVisibility(View.VISIBLE);
       }
       System.out.println("MyArray: " + Arrays.toString(myArray));
+
       if (myArray.length == 0) {
         myArray = game.getLastAction().getAvailableDice();
         Random rnd = new Random();
@@ -271,7 +288,9 @@ public class PlayFragment extends Fragment {
         myArray = game.getLastAction().getAvailableDice();
 //        diceAudio.start();
       });
+
     });
+
   }
 
   private void dieImage(int value, ImageView die) {

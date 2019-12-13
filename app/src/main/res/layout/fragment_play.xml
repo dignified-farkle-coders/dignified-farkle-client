@@ -11,6 +11,14 @@
   android:background="@drawable/main_background"
   tools:context=".PlayFragment">
 
+  <Button
+    android:id="@+id/leave_game_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Leave Game"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintRight_toRightOf="parent"/>
+
   <TextView
     android:id="@+id/display_lost_points"
     android:layout_width="wrap_content"

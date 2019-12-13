@@ -28,13 +28,15 @@ public class MarketActivity extends AppCompatActivity {
   private int basket = 0;
   private int dieCount = 1;
   private TextView dieId;
+  private SharedPreferences pref;
+  private Editor editor;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_market);
     super.onCreate(savedInstanceState);
-    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-    Editor editor = pref.edit();
+    pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+    editor = pref.edit();
 
     dieId = findViewById(R.id.die_id);
     dieId.setText(Html.fromHtml("&#35; " + 1));
@@ -108,41 +110,49 @@ public class MarketActivity extends AppCompatActivity {
       }
     });
 
-      upArrow.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          if(dieCount != 6) {
-            dieCount += 1;
-          }
-          userDie.setColorFilter(Color.parseColor(pref.getString(String.valueOf(dieCount), "#00FFFFFF"))); // getting String);
-          dieId.setText(Html.fromHtml("&#35; " + dieCount));
-          if(dieCount < 6) {
-            downArrow.setVisibility(View.VISIBLE);
-            upArrow.setVisibility(View.VISIBLE);
-          } else {
-            upArrow.setVisibility(View.INVISIBLE);
-          }
+    upArrow.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        if(dieCount != 6) {
+          dieCount += 1;
         }
-      });
+        if (pref.contains(String.valueOf(dieCount))) {
+          userDie.setColorFilter(Color.parseColor(pref.getString(String.valueOf(dieCount), "#00FFFFFF")));
+        } else {
+          userDie.setColorFilter(Color.parseColor("#00FFFFFF"));
+        }
+        dieId.setText(Html.fromHtml("&#35; " + dieCount));
+        if(dieCount < 6) {
+          downArrow.setVisibility(View.VISIBLE);
+          upArrow.setVisibility(View.VISIBLE);
+        } else {
+          upArrow.setVisibility(View.INVISIBLE);
+        }
+      }
+    });
 
-      downArrow.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          if(dieCount != 1) {
-            dieCount -= 1;
-          }
-          userDie.setColorFilter(Color.parseColor(pref.getString(String.valueOf(dieCount), "#00FFFFFF"))); // getting String);
-          dieId.setText(Html.fromHtml("&#35; " + dieCount));
-          if(dieCount > 1) {
-            downArrow.setVisibility(View.VISIBLE);
-            upArrow.setVisibility(View.VISIBLE);
-          } else {
-            downArrow.setVisibility(View.INVISIBLE);
-          }
+    downArrow.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        if(dieCount != 1) {
+          dieCount -= 1;
         }
-      });
+        if(pref.contains(String.valueOf(dieCount))) {
+          userDie.setColorFilter(Color.parseColor(
+              pref.getString(String.valueOf(dieCount), "#00FFFFFF")));
+        } else {
+          userDie.setColorFilter(Color.parseColor("#00FFFFFF"));
+        }
+        dieId.setText(Html.fromHtml("&#35; " + dieCount));
+        if(dieCount > 1) {
+          downArrow.setVisibility(View.VISIBLE);
+          upArrow.setVisibility(View.VISIBLE);
+        } else {
+          downArrow.setVisibility(View.INVISIBLE);
+        }
+      }
+    });
 
 
   }
 }
-

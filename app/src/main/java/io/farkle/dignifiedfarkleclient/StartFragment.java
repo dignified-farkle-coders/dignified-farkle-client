@@ -1,6 +1,9 @@
 package io.farkle.dignifiedfarkleclient;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +37,6 @@ public class StartFragment extends Fragment implements View.OnClickListener {
   public static TextView victoryPoints;
   private ImageView goldenDice;
   private Button marketButton;
-  private GoogleSignInService googleSignInService = GoogleSignInService.getInstance();
   public static int playerPoints = 0;
   public static Player player = new Player();
 
@@ -45,6 +47,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_start, container, false);
+
     button = view.findViewById(R.id.profile_button);
     button.setOnClickListener(this);
     playButton = view.findViewById(R.id.find_game);
