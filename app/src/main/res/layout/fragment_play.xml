@@ -12,6 +12,16 @@
   tools:context=".PlayFragment">
 
   <TextView
+    android:id="@+id/display_lost_points"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="LostPoints"
+    app:layout_constraintTop_toBottomOf="@id/point_tally"
+    app:layout_constraintLeft_toLeftOf="@id/point_tally"
+    app:layout_constraintRight_toRightOf="@id/point_tally"
+    style="@style/Headers"/>
+
+  <TextView
     android:id="@+id/display_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

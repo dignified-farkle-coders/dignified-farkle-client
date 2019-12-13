@@ -2,6 +2,7 @@ package io.farkle.dignifiedfarkleclient;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class PlayFragment extends Fragment {
   private boolean isSelected4;
   private boolean isSelected5;
   private boolean isSelected6;
+  private TextView displayLostPoints;
   private int[] myArray = new int[6];
   private TextView userDisplay;
   private MainViewModel viewModel;
@@ -40,7 +42,8 @@ public class PlayFragment extends Fragment {
   private ImageView die4;
   private ImageView die5;
   private ImageView die6;
-//  MediaPlayer diceAudio;
+  private int userPoints = 0;
+  //  MediaPlayer diceAudio;
   private TextView pointTally;
   private GamePlayer gamePlayer;
 
@@ -50,6 +53,8 @@ public class PlayFragment extends Fragment {
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_play, container, false);
 
+    displayLostPoints = view.findViewById(R.id.display_lost_points);
+    displayLostPoints.setVisibility(View.INVISIBLE);
     die1 = view.findViewById(R.id.die_1);
     die1.setVisibility(View.GONE);
     die2 = view.findViewById(R.id.die_2);
@@ -96,12 +101,13 @@ public class PlayFragment extends Fragment {
       Game game = (Game) obj;
       List<GamePlayer> gamePlayers = game.getGamePlayers();
       for (GamePlayer gamePlayer : gamePlayers) {
-        int userPoints = gamePlayer.getPoints();
+        userPoints = gamePlayer.getPoints();
         System.out.println("DONE: " + userPoints);
         pointTally.setText(String.valueOf(userPoints));
       }
+
       myArray = game.getLastAction().getAvailableDice();
-      if(game.getLastAction().getFarkleOut()) {
+      if (game.getLastAction().getFarkleOut()) {
         pointTally.setText("Farkle!!!");
         reRoll.setVisibility(View.GONE);
         stay.setVisibility(View.GONE);
@@ -109,16 +115,17 @@ public class PlayFragment extends Fragment {
       }
       System.out.println("MyArray: " + Arrays.toString(myArray));
       if (myArray.length == 0) {
+        myArray = game.getLastAction().getAvailableDice();
         Random rnd = new Random();
         System.out.println("Hard Bug Fix Implemented");
         int value = rnd.nextInt(6) + 1;
-        myArray = new int[]{value};
+        myArray = new int[]{5};
       }
 
       if (myArray.length > 0) {
         dieImage(myArray[0], die1);
         die1.setVisibility(View.VISIBLE);
-        if(!game.getLastAction().getFarkleOut()) {
+        if (!game.getLastAction().getFarkleOut()) {
           die1.setOnClickListener(one -> {
             if (!isSelected1) {
               die1.setColorFilter(Color.argb(175, 57, 102, 255));
@@ -137,7 +144,7 @@ public class PlayFragment extends Fragment {
       if (myArray.length > 1) {
         dieImage(myArray[1], die2);
         die2.setVisibility(View.VISIBLE);
-        if(!game.getLastAction().getFarkleOut()) {
+        if (!game.getLastAction().getFarkleOut()) {
           die2.setOnClickListener(one -> {
             if (!isSelected2) {
               die2.setColorFilter(Color.argb(175, 57, 102, 255));
@@ -156,7 +163,7 @@ public class PlayFragment extends Fragment {
       if (myArray.length > 2) {
         dieImage(myArray[2], die3);
         die3.setVisibility(View.VISIBLE);
-        if(!game.getLastAction().getFarkleOut()) {
+        if (!game.getLastAction().getFarkleOut()) {
           die3.setOnClickListener(one -> {
             if (!isSelected3) {
               die3.setColorFilter(Color.argb(175, 57, 102, 255));
@@ -175,7 +182,7 @@ public class PlayFragment extends Fragment {
       if (myArray.length > 3) {
         dieImage(myArray[3], die4);
         die4.setVisibility(View.VISIBLE);
-        if(!game.getLastAction().getFarkleOut()) {
+        if (!game.getLastAction().getFarkleOut()) {
           die4.setOnClickListener(one -> {
             if (!isSelected4) {
               die4.setColorFilter(Color.argb(175, 57, 102, 255));
@@ -194,7 +201,7 @@ public class PlayFragment extends Fragment {
       if (myArray.length > 4) {
         dieImage(myArray[4], die5);
         die5.setVisibility(View.VISIBLE);
-        if(!game.getLastAction().getFarkleOut()) {
+        if (!game.getLastAction().getFarkleOut()) {
           die5.setOnClickListener(one -> {
             if (!isSelected5) {
               die5.setColorFilter(Color.argb(175, 57, 102, 255));
@@ -213,7 +220,7 @@ public class PlayFragment extends Fragment {
       if (myArray.length > 5) {
         dieImage(myArray[5], die6);
         die6.setVisibility(View.VISIBLE);
-        if(!game.getLastAction().getFarkleOut()) {
+        if (!game.getLastAction().getFarkleOut()) {
           die6.setOnClickListener(one -> {
             if (!isSelected6) {
               die6.setColorFilter(Color.argb(175, 57, 102, 255));
@@ -229,7 +236,6 @@ public class PlayFragment extends Fragment {
         }
       }
 
-
       userDisplay = view.findViewById(R.id.display_name);
 
       try {
@@ -240,10 +246,10 @@ public class PlayFragment extends Fragment {
       }
 
       reRoll.setOnClickListener(v -> {
-          System.out.println("myArray " + Arrays.toString(myArray));
-          System.out.println("dieArray " + Arrays.toString(dieArray(myArray.length)));
-          viewModel.sendFrozen(dieArray(myArray.length), false);
-          myArray = game.getLastAction().getAvailableDice();
+        System.out.println("myArray " + Arrays.toString(myArray));
+        System.out.println("dieArray " + Arrays.toString(dieArray(myArray.length)));
+        viewModel.sendFrozen(dieArray(myArray.length), false);
+        myArray = game.getLastAction().getAvailableDice();
 
 //        diceAudio.start();
       });
