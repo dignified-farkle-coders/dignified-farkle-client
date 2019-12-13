@@ -99,7 +99,6 @@ public class MarketActivity extends AppCompatActivity {
       public void onClick(View v) {
         System.out.println("POINTS: " + StartFragment.playerPoints);
         if(StartFragment.player.getVictoryPoints() >= basket) {
-          System.out.println(StartFragment.player.getVictoryPoints() - basket);
           StartFragment.player.setVictoryPoints(StartFragment.player.getVictoryPoints() - basket);
           victoryPoints.setText(String.valueOf(StartFragment.player.getVictoryPoints()));
           StartFragment.victoryPoints.setText(String.valueOf(StartFragment.player.getVictoryPoints()));
@@ -118,7 +117,6 @@ public class MarketActivity extends AppCompatActivity {
           userDie.setColorFilter(Color.parseColor(pref.getString(String.valueOf(dieCount), "#00FFFFFF"))); // getting String);
           dieId.setText(Html.fromHtml("&#35; " + dieCount));
           if(dieCount < 6) {
-            System.out.println(dieCount);
             downArrow.setVisibility(View.VISIBLE);
             upArrow.setVisibility(View.VISIBLE);
           } else {
@@ -136,7 +134,6 @@ public class MarketActivity extends AppCompatActivity {
           userDie.setColorFilter(Color.parseColor(pref.getString(String.valueOf(dieCount), "#00FFFFFF"))); // getting String);
           dieId.setText(Html.fromHtml("&#35; " + dieCount));
           if(dieCount > 1) {
-            System.out.println(dieCount);
             downArrow.setVisibility(View.VISIBLE);
             upArrow.setVisibility(View.VISIBLE);
           } else {

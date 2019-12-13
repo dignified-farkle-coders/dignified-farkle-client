@@ -91,7 +91,9 @@ public class PlayFragment extends Fragment {
     viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 //    diceAudio = MediaPlayer.create(getContext(), R.raw.dice_roll);
     Button reRoll = view.findViewById(R.id.re_roll);
+    reRoll.setVisibility(View.INVISIBLE);
     Button stay = view.findViewById(R.id.stay);
+    stay.setVisibility(View.INVISIBLE);
     Button next = view.findViewById(R.id.next);
     pointTally = view.findViewById(R.id.point_tally);
     next.setVisibility(View.GONE);
@@ -112,6 +114,12 @@ public class PlayFragment extends Fragment {
         next.setVisibility(View.VISIBLE);
       }
       System.out.println("MyArray: " + Arrays.toString(myArray));
+      if (myArray.length == 0) {
+        Random rnd = new Random();
+        System.out.println("Hard Bug Fix Implemented");
+        int value = rnd.nextInt(6) + 1;
+        myArray = new int[]{value};
+      }
 
       if (myArray.length > 0) {
         dieImage(myArray[0], die1);
@@ -121,6 +129,8 @@ public class PlayFragment extends Fragment {
             if (!isSelected1) {
               die1.setColorFilter(Color.argb(175, 57, 102, 255));
               isSelected1 = true;
+              reRoll.setVisibility(View.VISIBLE);
+              stay.setVisibility(View.VISIBLE);
             } else {
               die1.setColorFilter(null);
               isSelected1 = false;
@@ -138,6 +148,8 @@ public class PlayFragment extends Fragment {
             if (!isSelected2) {
               die2.setColorFilter(Color.argb(175, 57, 102, 255));
               isSelected2 = true;
+              reRoll.setVisibility(View.VISIBLE);
+              stay.setVisibility(View.VISIBLE);
             } else {
               die2.setColorFilter(null);
               isSelected2 = false;
@@ -155,6 +167,8 @@ public class PlayFragment extends Fragment {
             if (!isSelected3) {
               die3.setColorFilter(Color.argb(175, 57, 102, 255));
               isSelected3 = true;
+              reRoll.setVisibility(View.VISIBLE);
+              stay.setVisibility(View.VISIBLE);
             } else {
               die3.setColorFilter(null);
               isSelected3 = false;
@@ -172,6 +186,8 @@ public class PlayFragment extends Fragment {
             if (!isSelected4) {
               die4.setColorFilter(Color.argb(175, 57, 102, 255));
               isSelected4 = true;
+              reRoll.setVisibility(View.VISIBLE);
+              stay.setVisibility(View.VISIBLE);
             } else {
               die4.setColorFilter(null);
               isSelected4 = false;
@@ -189,6 +205,8 @@ public class PlayFragment extends Fragment {
             if (!isSelected5) {
               die5.setColorFilter(Color.argb(175, 57, 102, 255));
               isSelected5 = true;
+              reRoll.setVisibility(View.VISIBLE);
+              stay.setVisibility(View.VISIBLE);
             } else {
               die5.setColorFilter(null);
               isSelected5 = false;
@@ -206,6 +224,8 @@ public class PlayFragment extends Fragment {
             if (!isSelected6) {
               die6.setColorFilter(Color.argb(175, 57, 102, 255));
               isSelected6 = true;
+              reRoll.setVisibility(View.VISIBLE);
+              stay.setVisibility(View.VISIBLE);
             } else {
               die6.setColorFilter(null);
               isSelected6 = false;
@@ -214,6 +234,7 @@ public class PlayFragment extends Fragment {
           });
         }
       }
+
 
       userDisplay = view.findViewById(R.id.display_name);
 
@@ -225,10 +246,11 @@ public class PlayFragment extends Fragment {
       }
 
       reRoll.setOnClickListener(v -> {
-        System.out.println("myArray " + Arrays.toString(myArray));
-        System.out.println("dieArray " + Arrays.toString(dieArray(myArray.length)));
-        viewModel.sendFrozen(dieArray(myArray.length), false);
-        myArray = game.getLastAction().getAvailableDice();
+          System.out.println("myArray " + Arrays.toString(myArray));
+          System.out.println("dieArray " + Arrays.toString(dieArray(myArray.length)));
+          viewModel.sendFrozen(dieArray(myArray.length), false);
+          myArray = game.getLastAction().getAvailableDice();
+
 //        diceAudio.start();
       });
 
