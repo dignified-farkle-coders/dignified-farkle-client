@@ -1,11 +1,7 @@
 package io.farkle.dignifiedfarkleclient;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,14 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProviders;
-import io.farkle.dignifiedfarkleclient.model.entity.Action;
 import io.farkle.dignifiedfarkleclient.model.entity.Game;
 import io.farkle.dignifiedfarkleclient.model.entity.GamePlayer;
 import io.farkle.dignifiedfarkleclient.viewmodel.MainViewModel;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import org.w3c.dom.Text;
 
 public class PlayFragment extends Fragment {
 
@@ -259,7 +253,7 @@ public class PlayFragment extends Fragment {
         for (int i = 0; i < returnArray.length; i++) {
           returnArray[i] = returnArray[i] * -1;
         }
-        viewModel.sendFrozen(returnArray, true);
+        viewModel.sendFrozen(dieArray(myArray.length), true);
         myArray = game.getLastAction().getAvailableDice();
 //        diceAudio.start();
       });
