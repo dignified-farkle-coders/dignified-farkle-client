@@ -36,6 +36,8 @@ public class StartFragment extends Fragment implements View.OnClickListener {
   private Button marketButton;
   private GoogleSignInService googleSignInService = GoogleSignInService.getInstance();
   public static int playerPoints = 0;
+  public static Player player = new Player();
+
 
 
   @Nullable
@@ -64,7 +66,6 @@ public class StartFragment extends Fragment implements View.OnClickListener {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
-    Player player = new Player();
 
     goldenDice.setOnClickListener(v -> {
       claim.setVisibility(View.INVISIBLE);
@@ -80,7 +81,6 @@ public class StartFragment extends Fragment implements View.OnClickListener {
       fadeOut.setStartOffset(800 + fadeIn.getStartOffset());
       player.setVictoryPoints(1000);
       playerPoints = player.getVictoryPoints();
-
 
       victoryPoints.setText(String.valueOf(playerPoints));
 
